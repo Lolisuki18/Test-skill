@@ -1,0 +1,15 @@
+=== CI Run #142 (GitHub Actions - ubuntu-latest, Python 3.12) ===
+Run python -W error -m unittest discover -s tests -t .
+..................................................................E
+======================================================================
+ERROR: test_http_health_and_notes (tests.test_notes_web.NotesWebTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "tests/test_notes_web.py", line 35, in test_http_health_and_notes
+    with urlopen(f"http://127.0.0.1:{port}/health") as r:
+ConnectionRefusedError: [Errno 111] Connection refused
+(Note: intermittent in CI when thread hasn't entered serve_forever yet, OR ResourceWarning in Windows/Linux)
+----------------------------------------------------------------------
+Ran 68 tests in 1.120s
+FAILED (errors=1)
+Error: Process completed with exit code 1.

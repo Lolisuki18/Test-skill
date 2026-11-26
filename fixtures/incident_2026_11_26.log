@@ -1,0 +1,5 @@
+[2026-11-26 14:02:11 UTC] ALERT: notes_web HTTP 500 spike on POST /api/notes
+[2026-11-26 14:02:12 UTC] Traceback: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0) in NotesHandler.do_POST (notes_web/app.py:114)
+[2026-11-26 14:02:15 UTC] Impact: 18% of POST /api/notes requests with empty or malformed JSON body returned connection reset / 500 for 12 minutes (14:02 - 14:14 UTC)
+[2026-11-26 14:10:00 UTC] Mitigation: Upstream nginx rate-limited malformed bots; hotfix drafted to catch json.JSONDecodeError and return 400.
+[2026-11-26 14:14:00 UTC] Resolved: Error rate returned to 0%.
