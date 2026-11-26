@@ -36,6 +36,8 @@ def load_tasks(path: Path) -> Tuple[List[Task], int]:
         return [], 1
     except OSError as exc:
         raise StorageError("cannot read %s: %s" % (path, exc)) from exc
+    except UnicodeDecodeError as exc:
+        raise StorageError("%s is not valid UTF-8 (%s); fix or remove it" % (path, exc)) from exc
     if not raw.strip():
         return [], 1
     try:

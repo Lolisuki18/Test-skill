@@ -79,6 +79,20 @@ class CorruptFileTests(StorageTestCase):
         self.assert_rejected_and_untouched(json.dumps(bad), "invalid task")
 
 
+    def test_S3_non_utf8_bytes_raise_storage_error(self):  # R6 negative
+        content = "{}".encode("utf-16")  # e.g. a file produced by PowerShell `>`
+        self.path.write_bytes(content)
+        with self.assertRaisesRegex(StorageError, "not valid UTF-8"):
+            load_tasks(self.path)
+        self.assertEqual(self.path.read_bytes(), content)
+
+    def test_S3_utf8_bom_is_rejected_with_storage_error(self):  # R6 boundary
+        body = json.dumps({"version": 1, "next_id": 1, "tasks": []})
+        self.path.write_bytes(body.encode("utf-8-sig"))
+        with self.assertRaisesRegex(StorageError, "not valid JSON"):
+            load_tasks(self.path)
+
+
 class ResolvePathTests(unittest.TestCase):
     def test_S4_cli_arg_wins_over_env(self):  # R6 happy
         with mock.patch.dict(os.environ, {storage.ENV_VAR: "/env/tasks.json"}):

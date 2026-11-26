@@ -194,6 +194,16 @@ class CorruptStoreTests(CliTestCase):
                 self.assertIn("not valid JSON", err)
                 self.assertEqual(self.path.read_text(encoding="utf-8"), "{bad")
 
+    def test_C12_non_utf8_file_reports_error_without_traceback(self):  # R6 negative
+        content = "[]".encode("utf-16")
+        self.path.write_bytes(content)
+        for argv in (("list",), ("add", "x"), ("done", "1"), ("delete", "1")):
+            with self.subTest(argv=argv):
+                code, _, err = self.run_cli(*argv)
+                self.assertEqual(code, 1)
+                self.assertIn("not valid UTF-8", err)
+                self.assertEqual(self.path.read_bytes(), content)
+
 
 if __name__ == "__main__":
     unittest.main()
