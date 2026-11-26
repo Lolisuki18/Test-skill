@@ -117,7 +117,7 @@ Thresholds: same as round 1 (plan exit criteria plus `release-gate-criteria.md` 
 | Executed Rate (Pass+Fail)/Total | 100% | 69/70 = 98.6% (TC-ENC-005 Not Run) | Conditional |
 | Blocked | 0 | 0 | Go |
 | Open Blocker / Critical | 0 / 0 | 0 / 0 | Go |
-| Open Major | 0 | 1 by status rule (DEF-001 in `Re-test`; becomes 0 when the user closes it) | Conditional until closed |
+| Open Major | 0 | 0 after the user closed DEF-001 (was 1 in `Re-test` when the report was written) | Go |
 | RTM coverage | 100% | 6/6 = 100% | Go |
 | Fixed but not re-tested | 0 | 0 | Go |
 | Permissions/security | all run and Pass | N/A (single-user tool); NF-SEC-01..04 Pass in round 1, not re-run | Go (N/A) |
@@ -147,10 +147,10 @@ Other tracks: unit suite `python -W error -m unittest discover -s tests -t .` ->
 ## R2.3 Defects
 | Severity \ Status | New | Open | Fixed | Re-test | Closed | Reopened | Won't Fix |
 |---|---|---|---|---|---|---|---|
-| Major | 0 | 0 | 0 | 1 (DEF-001) | 0 | 0 | 0 |
-| Minor | 0 | 0 | 0 | 1 (DEF-002) | 0 | 0 | 0 |
+| Major | 0 | 0 | 0 | 0 | 1 (DEF-001) | 0 | 0 |
+| Minor | 0 | 0 | 0 | 0 | 1 (DEF-002) | 0 | 0 |
 
-Closing needs the user's word; QA does not close defects itself.
+DEF-001 and DEF-002 were Closed by the user after the round-2 summary (user said "close"; recorded in `04-defects.md`). Open Major is therefore 0; verdict stays Conditional Go (Executed Rate).
 
 ## R2.4 Residual risks
 - TC-ENC-005 Not Run: a real interactive console was never exercised. On a narrow console the emoji is displayed as `?` (by design of the fix); data is stored intact.

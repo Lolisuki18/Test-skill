@@ -51,7 +51,11 @@ Real results (build 81d0868, Windows, Python 3.14.6, cp1252 pipes):
 Verdict: Conditional Go (Executed Rate 69/70 = 98.6% < 100% because TC-ENC-005 is Not Run).
 Open items: TC-ENC-005 NOT RUN (needs the user's real interactive terminal; failing it would make the verdict No-Go); DEF-001 and DEF-002 are in status Re-test, not Closed (QA never closes defects itself); NF-* cases not re-run; NF-COMP-01 Not Run; U+2028 title accepted; harness edit (matrix_cases.py) was needed and is committed with the QA artifacts; the scripted pass ran before the regression plan was confirmed.
 
-## Stage 4 - Docs - status: not started
+## Stage 4 - Docs - 2026-11-26 - status: Done (branch A, Phase 4 checklist; docs-sync-auditor not run as a separate audit)
+Artifacts: README.md (title rule, replace-on-print note, exit code 1 row, 66 tests, line ref), docs/diagrams/sequence-add-task.md (+_make_output_safe step, new line refs), docs/_evidence.md (new facts, 66 tests). Not touched: ADRs (no new decision recorded; deciders/alternatives unknown), docs/api, docs/runbook.md.
+Real results (Docs Phase 4 anti-drift): every README command re-run in a temp data file: `--version` -> `taskbox 0.1.0`; add/list --sort due/done (twice)/delete/list -> outputs as documented; `PYTHONUTF8=1 add "Coffee <emoji>"` + list shows the emoji; `python -m unittest discover -s tests -t .` -> `Ran 66 tests in 0.834s OK`. `file:line` refs re-read against the source (cli.py:105-110, 113-121; models.py:60-70, 86).
+Open items: `[Cần bổ sung: minimum Python version]` and `[Cần bổ sung: license]` remain in README; sequence diagram not rendered (no Mermaid renderer); `docs-sync-auditor` not run; real interactive terminal behaviour is documented as "not checked".
+
 ## Stage 5 - Release - status: not started
 
 ## Decisions
@@ -60,3 +64,4 @@ Open items: TC-ENC-005 NOT RUN (needs the user's real interactive terminal; fail
 | 2026-11-26 | Continue from existing plan/qa-artifacts/docs; all four sets installed | user |
 | 2026-11-26 | Fix = errors="replace" on stdout/stderr + reject control chars in titles | user (ok at bug-investigator hard stop) |
 | 2026-11-26 | Keep DEF-001 and DEF-002 in one commit; accept the Notes-level risks | user |
+| 2026-11-26 | Close DEF-001 and DEF-002 after round-2 Pass; accept Conditional Go with TC-ENC-005 Not Run | user |

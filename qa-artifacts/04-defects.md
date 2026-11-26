@@ -2,15 +2,15 @@
 - **Phase:** 4/5 — Defect Management
 - **Date:** 2026-11-26
 - **Version:** v0.2
-- **Status:** Draft (round 2: both defects re-tested)
+- **Status:** Draft (round 2: both defects Closed by the user; TC-ENC-005 still Not Run)
 - **Requirement source:** `qa-artifacts/03-execution-notes.md` round 1 (build `ac9ee0a`), `qa-artifacts/02-test-matrix.md`
 - **Approver:** n/a (no hard stop in Phase 4)
 
 ## 1. Summary table
 | Defect ID | Title | Severity | Priority | Status | Related TC |
 |---|---|---|---|---|---|
-| DEF-001 | [Console output] `add`/`list` crash with a Python traceback when a title has a character the console code page cannot print (e.g. `☕` on cp1252) | Major | P1 (proposed) | Re-test (round 2 Pass; Close pending user) | TC-ENC-001, TC-ENC-002 |
-| DEF-002 | [Add] A title containing a line break is accepted and breaks the `list` table | Minor | P3 (proposed) | Re-test (round 2 Pass; Close pending user) | TC-ADD-008 |
+| DEF-001 | [Console output] `add`/`list` crash with a Python traceback when a title has a character the console code page cannot print (e.g. `☕` on cp1252) | Major | P1 (proposed) | Closed (user, 2026-11-26, after round 2 Pass) | TC-ENC-001, TC-ENC-002 |
+| DEF-002 | [Add] A title containing a line break is accepted and breaks the `list` table | Minor | P3 (proposed) | Closed (user, 2026-11-26, after round 2 Pass) | TC-ADD-008 |
 
 ## 2. Defect details
 

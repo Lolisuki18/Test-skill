@@ -4,7 +4,7 @@ A small command-line task tracker. Python 3, standard library only. Tasks are st
 
 ## Prerequisites
 
-- Python 3. `[Cần bổ sung: minimum Python version - no pyproject.toml or CI file declares it; code uses `datetime.date.fromisoformat` (taskbox/models.py:83)]`. Verified on Python 3.14.6.
+- Python 3. `[Cần bổ sung: minimum Python version - no pyproject.toml or CI file declares it; code uses `datetime.date.fromisoformat` (taskbox/models.py:86)]`. Verified on Python 3.14.6.
 - No third-party packages; nothing to install.
 
 ## Usage
@@ -24,6 +24,8 @@ python -m taskbox --version
 - Filters in `list` combine with AND. `list` on an empty store prints `No tasks.`
 - `done` on an already-done task prints `Task N is already done.` and exits 0.
 - Ids are not reused after `delete`.
+- A title is trimmed, must not be empty, at most 200 characters, and must not contain control characters (line breaks, tabs, NUL, ESC): `error: title must not contain control characters`, exit 1, nothing saved (`taskbox/models.py:60-70`).
+- Output never crashes on text the console cannot print: stdout and stderr use `errors="replace"`, so an emoji on a cp1252 console is shown as `?` while the data file keeps it (`taskbox/cli.py:105-110`). For a UTF-8 display set `PYTHONUTF8=1`. Not checked in an interactive terminal (see `qa-artifacts/05-summary-report.md`, TC-ENC-005).
 
 ## Data file
 
@@ -42,7 +44,7 @@ The file is created (with its folder) on the first write. A missing or empty fil
 | Code | Meaning |
 |---|---|
 | 0 | ok |
-| 1 | error: validation (empty title, bad due date), unknown id, unreadable or corrupt data file |
+| 1 | error: validation (empty title, control character in title, bad due date), unknown id, unreadable or corrupt data file |
 | 2 | bad command line (unknown option, invalid `--priority`/`--status` choice, non-integer id, missing command) |
 
 ## Project structure
@@ -53,7 +55,7 @@ The file is created (with its folder) on the first write. A missing or empty fil
 | `taskbox/storage.py` | JSON load/save, atomic write, `StorageError` |
 | `taskbox/cli.py` | argument parser and command handlers |
 | `taskbox/__main__.py` | `python -m taskbox` entry point |
-| `tests/` | unittest suite (60 tests) |
+| `tests/` | unittest suite (66 tests) |
 | `plan/` | implementation plan (listed in `.gitignore`, not tracked by git) |
 
 ## Tests
@@ -62,7 +64,7 @@ The file is created (with its folder) on the first write. A missing or empty fil
 python -m unittest discover -s tests -t .
 ```
 
-Last run in this session: 60 tests, OK.
+Last run in this session: 66 tests, OK (`Ran 66 tests in 0.859s`).
 
 ## Documentation
 
