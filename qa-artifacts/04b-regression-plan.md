@@ -1,7 +1,7 @@
 # Regression Plan — build `ac9ee0a` (taskbox 0.1.0)
 - **Phase:** 4/5 — Defect Management (regression)
 - **Date:** 2026-11-26
-- **Version:** v0.1
+- **Version:** v0.2
 - **Status:** Draft
 - **Requirement source:** `qa-artifacts/02-test-matrix.md` (RTM), `qa-artifacts/04-defects.md`, `git diff 9a50011 ac9ee0a`
 - **Approver:** [Needs input: user to confirm the layer to run]
@@ -42,3 +42,25 @@ All cases of R2 filters/sort (TC-LIST-002..011), R5 validation (TC-VAL-001..015)
 > - *Why these layers:* a one-line change in the JSON error path touches one requirement (R6) but every command calls `load_tasks`, so smoke plus the R6 sibling cases is enough; a full run would repeat 60 cases that cannot be affected.
 > - *Blind spots that remain:* other exceptions `json.loads` can raise (e.g. `MemoryError`, huge numbers) have no case; config and data changes map to no case.
 > - *Default I will choose if you do not reply:* run smoke first, then targeted, full only on a failure.
+
+
+---
+# Round 2 — build `81d0868` (fix for DEF-001, DEF-002)
+Version v0.2. The section above stays as the plan for build `ac9ee0a`.
+
+## R2.1 Change summary
+- Base to target: `40d2564` to `81d0868` (`git diff fix/list-bad-path...HEAD`): `taskbox/cli.py` +`_make_output_safe()` called first in `main()` (stdout/stderr `errors="replace"`); `taskbox/models.py` `validate_title` rejects category-Cc characters; tests: `tests/test_console_encoding.py` (new, 4), `tests/test_models.py` (+2).
+- Defects fixed in this build: DEF-001, DEF-002.
+
+## R2.2 Impact table
+| Changed area | Impacted requirements | Cases | Why | Layer |
+|---|---|---|---|---|
+| `cli.py` `main()` runs for every command | R1-R6 | all `Auto (API)` cases | `main()` is the entry of every command; reconfiguring stdout/stderr can alter every printed line | Full (Auto only: one scripted pass of 66 cases is cheap) |
+| `models.py` `validate_title` (also called by `Task.from_dict` when loading) | R1, R5, R6 | TC-ADD-001..008, TC-VAL-001..004, TC-STORE-006/007/014, TC-ENC-001/002 | Direct change; load path re-validates stored titles | Targeted (covered by the full Auto pass) |
+| Smoke: P0 | R1, R3, R4, R5, R6 | TC-ADD-001, TC-DONE-001, TC-DONE-003, TC-DEL-001, TC-DEL-002, TC-VAL-016, TC-STORE-004, TC-STORE-007 | P0 rule | Smoke |
+| Defect re-test | R1, R2, R5 | TC-ENC-001, TC-ENC-002, TC-ENC-003, TC-ENC-004, TC-ADD-008 | Original steps of DEF-001/002 | Re-test |
+
+## R2.3 Layers run
+- Smoke + Targeted + all 66 Auto cases in one scripted pass; Manual TC-ADD-008 run by hand.
+- Excluded: Manual TC-STORE-015/016 (concurrency and read-only file; no change in `storage.py`, evidence: `git diff --stat` shows no `storage.py`), NF-* cases (no timing-relevant change: one `reconfigure` call; NF-PERF not re-run, [Needs input: confirm]), TC-ENC-005 (needs the user's terminal).
+- Process note: the scripted pass was run before the user confirmed this plan (the harness has no partial mode); the plan was written from the same change set afterwards.

@@ -1,8 +1,8 @@
 # Execution Notes — taskbox 0.1.0 (CLI task tracker)
 - **Phase:** 3/5 — Execution & Automation
 - **Date:** 2026-11-26
-- **Version:** v0.1
-- **Status:** Draft (round 1 complete)
+- **Version:** v0.2
+- **Status:** Draft (round 2 complete)
 - **Requirement source:** `qa-artifacts/02-test-matrix.md` v0.1 (Approved), `qa-artifacts/02b-nonfunctional.md` v0.1 (Approved)
 - **Approver:** n/a (no hard stop in Phase 3)
 
@@ -214,3 +214,34 @@ NF-SEC-04: real ~/.taskbox/tasks.json before=(False, None) after=(False, None) -
 - TC-ENC-005: needs the user's interactive terminal. Not Run.
 - NF-COMP-01: no other Python versions installed.
 - Process note: the first full run of the automated cases happened before the `02-test-matrix.md` status line was changed to Approved (the user had already said "approved"); the whole set was re-run afterwards and only the second run is recorded here.
+
+
+---
+# Round 2 (re-test of the DEF-001/DEF-002 fix)
+Round 1 above stays unchanged for history. Version bumped to v0.2.
+
+## R2.1 Run info
+- Round: 2 | Date: 2026-11-26 | Build under test: `81d0868` (branch `fix/console-encoding-and-newline-title`; `taskbox/` and `tests/` identical in HEAD `3b20b50`) | Environment: Windows 11 10.0.26200, Python 3.14.6, stdout/stderr redirected to pipes (cp1252), temp `TASKBOX_FILE` per case, `PYTHONUTF8`/`PYTHONIOENCODING` unset by the harness.
+- Runner: `python qa-artifacts/tools/matrix_cases.py run` (66 Auto cases) plus one Manual case typed in a shell by the QA agent. Round-1 raw results kept in `qa-artifacts/tools/results-round1.json`; `results.json` now holds round 2.
+- Harness fix needed before the run: TC-ENC-001/002 first came back `Blocked` with `harness error: IndexError('list index out of range')` (the failure-message expression `err.strip().splitlines()[-1]` crashed when stderr is empty, which only happens once the bug is fixed). `matrix_cases.py` was changed to `(err.strip().splitlines() or [""])[-1]` and the full run repeated; only the second run is counted below. The harness edit is uncommitted at run time.
+
+## R2.2 Results (changed or re-observed cases)
+| TC ID | Execution Type | Result | Run date | Defect ID | Evidence/Notes |
+|---|---|---|---|---|---|
+| TC-ENC-001 | Auto (API) | Pass | 2026-11-26 | DEF-001 | all checks met (1 commands): exit 0, no traceback on cp1252 pipe |
+| TC-ENC-002 | Auto (API) | Pass | 2026-11-26 | DEF-001 | all checks met (1 commands): list exit 0, no traceback |
+| TC-ENC-003 | Auto (API) | Pass | 2026-11-26 | — | workaround path still works (2 commands) |
+| TC-ENC-004 | Auto (API) | Pass | 2026-11-26 | — | Café prints unchanged (2 commands) |
+| TC-ADD-008 | Manual | Pass | 2026-11-26 | DEF-002 | Run by QA agent: `add $'line1
+line2'` -> `error: title must not contain control characters`, exit 1, no data file created; `list` -> `No tasks.` exit 0. Variants: `$'ab'` and `$'a	b'` rejected, exit 1; `$'  trailing newline ok
+'` accepted (trimmed). `$'a b'` cannot be passed from bash (NUL truncates the argument to `a`): NUL is covered only by the unit test. |
+| TC-ENC-005 | Manual | Not Run | 2026-11-26 | — | Still needs the user's own interactive terminal. [Needs input: user to run and report] |
+| TC-STORE-015, TC-STORE-016 | Manual | Pass (carried over) | 2026-11-26 | — | NOT re-run in round 2: excluded by the regression plan (storage/concurrency code unchanged). Result and evidence are those of round 1 on build `ac9ee0a`. |
+| all other 60 Auto cases | Auto (API) | Pass | 2026-11-26 | — | re-run in the full scripted pass, all checks met |
+
+Summary round 2: Total 70 | Pass 69 (67 run on build `81d0868`, 2 carried over from round 1) | Fail 0 | Blocked 0 | Not Run 1 (TC-ENC-005). Round 1 was Pass 66 / Fail 3 / Not Run 1.
+
+## R2.3 Automation
+- Command: `python qa-artifacts/tools/matrix_cases.py run` -> `70 results: Pass 66, Not Run 4` (the 4 Not Run are the Manual cases the script does not execute: TC-ADD-008, TC-STORE-015, TC-STORE-016, TC-ENC-005; see R2.2 for their real status).
+- Unit suite: `python -W error -m unittest discover -s tests -t .` -> `Ran 66 tests in 1.093s OK` (60 before plus 6 regression tests).
+- Not run in round 2: NF-* non-functional cases (not impacted, see `04b-regression-plan.md` round 2); NF-COMP-01 still Not Run.

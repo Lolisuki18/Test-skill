@@ -40,7 +40,17 @@ b'` -> error, exit 1. Tests: `tests/test_console_encoding.py` (real subprocess o
 **Notes**
 U+2028 is still accepted; titles already stored with control characters will not load. Tests: [CI result: no CI configured]. Closes DEF-001, DEF-002 (qa-artifacts/04-defects.md).
 
-## Stage 3 - QA - status: not started
+## Stage 3 - QA (round 2) - 2026-11-26 - status: Done, verdict Conditional Go
+Artifacts: qa-artifacts/03-execution-notes.md (R2 section, v0.2), 04-defects.md (re-test history, v0.2), 04b-regression-plan.md (round 2 section), 05-summary-report.md (Round 2 appended, v0.2), qa-artifacts/tools/results.json (round 2) and results-round1.json (kept), tools/matrix_cases.py (harness fix).
+QA Phases 1-2 (plan, matrix) not repeated: approved in round 1, no requirement changed (R1..R6 unchanged). Phase 3-5 re-run as "Re-test round 2".
+Real results (build 81d0868, Windows, Python 3.14.6, cp1252 pipes):
+- `python qa-artifacts/tools/matrix_cases.py run` -> 70 results: Pass 66, Not Run 4 (the 4 are Manual cases).
+- TC-ENC-001/002 Pass (were Fail), TC-ADD-008 Pass by hand (was Fail): `error: title must not contain control characters`, exit 1.
+- Totals: 70 | Pass 69 (67 run on 81d0868 + 2 Manual carried over from ac9ee0a: TC-STORE-015/016) | Fail 0 | Blocked 0 | Not Run 1.
+- Unit suite: `Ran 66 tests in 1.093s OK`.
+Verdict: Conditional Go (Executed Rate 69/70 = 98.6% < 100% because TC-ENC-005 is Not Run).
+Open items: TC-ENC-005 NOT RUN (needs the user's real interactive terminal; failing it would make the verdict No-Go); DEF-001 and DEF-002 are in status Re-test, not Closed (QA never closes defects itself); NF-* cases not re-run; NF-COMP-01 Not Run; U+2028 title accepted; harness edit (matrix_cases.py) was needed and is committed with the QA artifacts; the scripted pass ran before the regression plan was confirmed.
+
 ## Stage 4 - Docs - status: not started
 ## Stage 5 - Release - status: not started
 

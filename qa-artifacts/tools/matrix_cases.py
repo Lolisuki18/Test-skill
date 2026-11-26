@@ -461,7 +461,7 @@ case("TC-STORE-016", "R6", "STORE", "Read-only data file: add fails with a clean
 # ---------------- ENC (console encoding, finding #1) ----------------
 def t_enc_001(c):
     code, out, err = c.cli("add", "Buy coffee \u2615")
-    c.ok(code == 0, "exit %s" % code); c.ok("Traceback" not in err, "traceback printed: %s" % err.strip().splitlines()[-1][:90])
+    c.ok(code == 0, "exit %s" % code); c.ok("Traceback" not in err, "traceback printed: %s" % (err.strip().splitlines() or [""])[-1][:90])
 case("TC-ENC-001", "R1, R5", "ENC", "Add a title with a character outside cp1252 (`☕`) on a cp1252 console: no traceback, exit 0",
      "Windows console, code page cp1252; PYTHONUTF8 unset", "1. Run `add \"Buy coffee ☕\"`\n2. Check exit code and stderr", "title=Buy coffee ☕",
      "Exit 0 and `Added task 1: ...` (characters may be replaced); no Python traceback; (source: plan §5 \"unicode title kept intact\", audit finding 1)", "P1", "Auto (API)", t_enc_001)
@@ -469,7 +469,7 @@ case("TC-ENC-001", "R1, R5", "ENC", "Add a title with a character outside cp1252
 
 def t_enc_002(c):
     c.f.write_text(json.dumps({"version": 1, "next_id": 2, "tasks": [{"id": 1, "title": "Buy coffee \u2615", "priority": "med", "due": None, "status": "todo"}]}, ensure_ascii=False), encoding="utf-8")
-    code, out, err = c.cli("list"); c.ok(code == 0, "exit %s" % code); c.ok("Traceback" not in err, "traceback printed: %s" % err.strip().splitlines()[-1][:90])
+    code, out, err = c.cli("list"); c.ok(code == 0, "exit %s" % code); c.ok("Traceback" not in err, "traceback printed: %s" % (err.strip().splitlines() or [""])[-1][:90])
 case("TC-ENC-002", "R2, R6", "ENC", "List a store that contains `☕` on a cp1252 console: no traceback, exit 0",
      "Data file with a task titled `Buy coffee ☕` (UTF-8); cp1252 console", "1. Run `list`", "stored title with ☕", "Exit 0; table printed (characters may be replaced); no traceback", "P1", "Auto (API)", t_enc_002)
 

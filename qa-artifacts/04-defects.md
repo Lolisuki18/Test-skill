@@ -1,16 +1,16 @@
 # Defect Log — taskbox 0.1.0 (CLI task tracker)
 - **Phase:** 4/5 — Defect Management
 - **Date:** 2026-11-26
-- **Version:** v0.1
-- **Status:** Draft (round 1)
+- **Version:** v0.2
+- **Status:** Draft (round 2: both defects re-tested)
 - **Requirement source:** `qa-artifacts/03-execution-notes.md` round 1 (build `ac9ee0a`), `qa-artifacts/02-test-matrix.md`
 - **Approver:** n/a (no hard stop in Phase 4)
 
 ## 1. Summary table
 | Defect ID | Title | Severity | Priority | Status | Related TC |
 |---|---|---|---|---|---|
-| DEF-001 | [Console output] `add`/`list` crash with a Python traceback when a title has a character the console code page cannot print (e.g. `☕` on cp1252) | Major | P1 (proposed) | New | TC-ENC-001, TC-ENC-002 |
-| DEF-002 | [Add] A title containing a line break is accepted and breaks the `list` table | Minor | P3 (proposed) | New | TC-ADD-008 |
+| DEF-001 | [Console output] `add`/`list` crash with a Python traceback when a title has a character the console code page cannot print (e.g. `☕` on cp1252) | Major | P1 (proposed) | Re-test (round 2 Pass; Close pending user) | TC-ENC-001, TC-ENC-002 |
+| DEF-002 | [Add] A title containing a line break is accepted and breaks the `list` table | Minor | P3 (proposed) | Re-test (round 2 Pass; Close pending user) | TC-ADD-008 |
 
 ## 2. Defect details
 
@@ -49,8 +49,9 @@
 ## 3. Re-test history
 | Defect ID | Round | Build | Result | Regression checked |
 |---|---|---|---|---|
-| DEF-001 | — | — | No fix reported yet; nothing re-tested | — |
-| DEF-002 | — | — | No fix reported yet; nothing re-tested | — |
+| DEF-001 | 2 | `81d0868` | Pass. Original steps on a cp1252 pipe: `add "Buy coffee ☕"` -> `Added task 1: Buy coffee ?`, exit 0; `list` prints the table, exit 0 (TC-ENC-001/002 Pass in `03-execution-notes.md` R2.2). Variants: TC-ENC-003 (PYTHONUTF8=1) and TC-ENC-004 (Café) Pass. Not tested: real interactive terminal (TC-ENC-005 Not Run). Behaviour note: the emoji is shown as `?` on a narrow console, the stored data keeps it. | 66 unit tests OK; all 66 Auto cases Pass; TC-ADD-001, TC-LIST-001, TC-STORE-004 Pass (conditions of `05-summary-report.md` v0.1) |
+| DEF-002 | 2 | `81d0868` | Pass. `add $'line1
+line2'` -> `error: title must not contain control characters`, exit 1, nothing saved (TC-ADD-008 Pass). Variants ``, `	` rejected; trailing newline trimmed. | TC-VAL-001..004, TC-STORE-006/007/014 Pass |
 
 > **QA Advisor**
 > - *Why Severity and Priority are separate:* DEF-001 is technically Major (a main command fails) but its urgency depends on how many users run Windows consoles with non-Latin text; that call is the PO's.

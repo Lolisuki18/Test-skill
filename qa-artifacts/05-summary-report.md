@@ -1,8 +1,8 @@
 # Test Summary Report — taskbox 0.1.0 (CLI task tracker)
 - **Phase:** 5/5 — Summary Report
 - **Date:** 2026-11-26
-- **Version:** v0.1
-- **Status:** Draft
+- **Version:** v0.2
+- **Status:** Draft (round 2 appended at the end; sections 1-7 below are round 1, kept for history; latest verdict: Conditional Go, see Round 2)
 - **Requirement source:** `qa-artifacts/02-test-matrix.md`, `03-execution-notes.md` (round 1), `04-defects.md`, `04b-regression-plan.md`, `02b-nonfunctional.md`
 - **Build/commit:** `ac9ee0a` on branch `fix/list-bad-path` | **Environment:** Windows 11 10.0.26200, Python 3.14.6, console code page cp1252 (pipes), temp data files
 - **Approver:** [Needs input: PO / release owner]
@@ -99,3 +99,65 @@ Risky requirements: R1/R2 (console output of non-cp1252 titles, DEF-001).
 > - *Not Run is a risk:* the only unexecuted case is the one that looks at a real console, which is exactly where DEF-001 lives.
 > - *Blind spots still open:* permissions and sessions are N/A; network drop is N/A; double-click maps to two processes at once (lost updates); boundary data is covered.
 > - *Default I recommend:* Conditional Go with conditions 1-3. Choose "postpone one round" if you prefer to be safe.
+
+
+---
+# Round 2 — Test Summary after the DEF-001/DEF-002 fix
+- **Date:** 2026-11-26 | **Build/commit:** `81d0868` (branch `fix/console-encoding-and-newline-title`) | **Environment:** Windows 11 10.0.26200, Python 3.14.6, pipes with code page cp1252
+- **Sources:** `03-execution-notes.md` R2.2, `04-defects.md` (re-test history), `04b-regression-plan.md` round 2, unit suite output. Latest state per case is used; 2 Manual cases are carried over from round 1.
+
+## R2.1 Executive Verdict: Conditional Go
+Thresholds: same as round 1 (plan exit criteria plus `release-gate-criteria.md` defaults, not adjusted).
+
+| Criterion | Go | Actual | Met? |
+|---|---|---|---|
+| P0 Pass Rate | 100% | 8/8 = 100% | Go |
+| P1 Pass Rate | >= 95% | 23/23 = 100% | Go |
+| Overall Pass Rate | >= 95% | 69/70 = 98.6% | Go |
+| Executed Rate (Pass+Fail)/Total | 100% | 69/70 = 98.6% (TC-ENC-005 Not Run) | Conditional |
+| Blocked | 0 | 0 | Go |
+| Open Blocker / Critical | 0 / 0 | 0 / 0 | Go |
+| Open Major | 0 | 1 by status rule (DEF-001 in `Re-test`; becomes 0 when the user closes it) | Conditional until closed |
+| RTM coverage | 100% | 6/6 = 100% | Go |
+| Fixed but not re-tested | 0 | 0 | Go |
+| Permissions/security | all run and Pass | N/A (single-user tool); NF-SEC-01..04 Pass in round 1, not re-run | Go (N/A) |
+
+No No-Go cell is true. Verdict: **Conditional Go**. Even after both defects are closed, the Executed Rate cell stays Conditional because TC-ENC-005 is Not Run.
+
+**Conditions (round 1 -> round 2):**
+1. DEF-001 fixed and re-tested: **met** (TC-ENC-001/002 Pass on a cp1252 pipe; TC-ADD-001, TC-LIST-001, TC-STORE-004 Pass). Caveat: pipe, not an interactive console.
+2. DEF-002 fixed or decided: **met** (TC-ADD-008 Pass, rejected with exit 1).
+3. TC-ENC-005 run by the user in a real interactive terminal: **open**. Owner: user. Due: `[Needs input]`. If it shows a traceback, the verdict becomes No-Go.
+This is QA's recommendation; the release decision belongs to the user/PO.
+
+## R2.2 Execution summary
+| Total | Passed | Failed | Blocked | Not Run | Pass Rate |
+|---|---|---|---|---|---|
+| 70 | 69 (67 on `81d0868`, 2 carried over from `ac9ee0a`) | 0 | 0 | 1 | 98.6% |
+
+| Priority | Total | Passed | Failed | Not Run |
+|---|---|---|---|---|
+| P0 | 8 | 8 | 0 | 0 |
+| P1 | 23 | 23 | 0 | 0 |
+| P2 | 31 | 31 | 0 | 0 |
+| P3 | 8 | 7 | 0 | 1 |
+
+Other tracks: unit suite `python -W error -m unittest discover -s tests -t .` -> `Ran 66 tests in 1.093s OK`. NF cases: not re-run in round 2 (round 1: 9 Pass, 1 Not Run NF-COMP-01, 1 report-only NF-PERF-04).
+
+## R2.3 Defects
+| Severity \ Status | New | Open | Fixed | Re-test | Closed | Reopened | Won't Fix |
+|---|---|---|---|---|---|---|---|
+| Major | 0 | 0 | 0 | 1 (DEF-001) | 0 | 0 | 0 |
+| Minor | 0 | 0 | 0 | 1 (DEF-002) | 0 | 0 | 0 |
+
+Closing needs the user's word; QA does not close defects itself.
+
+## R2.4 Residual risks
+- TC-ENC-005 Not Run: a real interactive console was never exercised. On a narrow console the emoji is displayed as `?` (by design of the fix); data is stored intact.
+- U+2028 (category Zl) in a title is still accepted (ran: `add` exit 0). Titles already stored with a control character would fail to load. Not tested with a stored file.
+- Round-1 risks unchanged: lost updates under concurrent runs (TC-STORE-015, carried over), leftover `.taskbox-*.tmp` after kills, one Python version and one OS (NF-COMP-01 Not Run), light coverage of exotic JSON/file-lock cases.
+- Harness defect found and fixed during the run (IndexError when stderr is empty); the harness edit is not yet committed.
+- Plan 001 test count updated to 66.
+
+## R2.5 Missing data
+TC-ENC-005 result; owner and due dates for condition 3; supported Python versions/OSes; NF cases not re-run in round 2.
