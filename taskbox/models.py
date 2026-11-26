@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime
 import re
+import unicodedata
 from dataclasses import dataclass
 from typing import Optional
 
@@ -62,6 +63,8 @@ def validate_title(title) -> str:
     title = title.strip()
     if not title:
         raise ValidationError("title must not be empty")
+    if any(unicodedata.category(ch) == "Cc" for ch in title):
+        raise ValidationError("title must not contain control characters")
     if len(title) > MAX_TITLE_LEN:
         raise ValidationError("title must be at most %d characters" % MAX_TITLE_LEN)
     return title

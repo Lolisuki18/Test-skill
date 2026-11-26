@@ -102,7 +102,16 @@ def cmd_delete(args, path) -> int:
 _HANDLERS = {"add": cmd_add, "list": cmd_list, "done": cmd_done, "delete": cmd_delete}
 
 
+def _make_output_safe() -> None:
+    """Never crash on text the console code page cannot print (e.g. an emoji on cp1252)."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(errors="replace")
+
+
 def main(argv: Optional[List[str]] = None) -> int:
+    _make_output_safe()
     args = build_parser().parse_args(argv)
     path = resolve_path(args.file)
     try:

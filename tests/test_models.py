@@ -111,3 +111,16 @@ class TaskDictTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ControlCharacterTitleTests(unittest.TestCase):
+    """DEF-002: a line break in a title broke the list table."""
+
+    def test_R5_rejects_control_characters(self):  # R5 negative
+        for bad in ("line1\nline2", "a\rb", "tab\there", "nul\x00x", "esc\x1b[0m"):
+            with self.subTest(bad=bad):
+                with self.assertRaisesRegex(ValidationError, "control characters"):
+                    validate_title(bad)
+
+    def test_R5_surrounding_newline_is_still_trimmed(self):  # R5 boundary
+        self.assertEqual(validate_title("hi\n"), "hi")
