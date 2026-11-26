@@ -56,7 +56,12 @@ Artifacts: README.md (title rule, replace-on-print note, exit code 1 row, 66 tes
 Real results (Docs Phase 4 anti-drift): every README command re-run in a temp data file: `--version` -> `taskbox 0.1.0`; add/list --sort due/done (twice)/delete/list -> outputs as documented; `PYTHONUTF8=1 add "Coffee <emoji>"` + list shows the emoji; `python -m unittest discover -s tests -t .` -> `Ran 66 tests in 0.834s OK`. `file:line` refs re-read against the source (cli.py:105-110, 113-121; models.py:60-70, 86).
 Open items: `[Cần bổ sung: minimum Python version]` and `[Cần bổ sung: license]` remain in README; sequence diagram not rendered (no Mermaid renderer); `docs-sync-auditor` not run; real interactive terminal behaviour is documented as "not checked".
 
-## Stage 5 - Release - status: not started
+## Stage 5 - Release - 2026-11-26 - status: Done as preparation only (no tag, no deploy, no push); release verdict: Conditional Go, not released
+Artifacts: CHANGELOG.md (Unreleased: +Changed, +Fixed entry citing 81d0868), docs/release-notes.md (draft). `runbook-writer` and `ci-cd-setup` not used: local CLI, no Dockerfile/CI/infra in the repo (docs/runbook.md absent).
+Real results: range `fix/list-bad-path..HEAD` = 4 commits read (81d0868 fix; 3b20b50, e4590e0, b942a83 docs/qa/notes: omitted from the changelog on purpose). Last test run: `Ran 66 tests in 0.834s OK`.
+Open items: version and date `[Needs input]` (`__version__` = 0.1.0, no tag); PR base branch `[Needs input]`; TC-ENC-005 Not Run (user's interactive terminal; failing it = No-Go); NF-COMP-01 Not Run; minimum Python version and license `[Cần bổ sung]`; lost-update risk accepted in plan; U+2028 title accepted; PR not opened and nothing pushed (user's decision).
+Release verdict (QA recommendation, decision belongs to the user): Conditional Go. Condition left: user runs TC-ENC-005 and reports.
+
 
 ## Decisions
 | Date | Decision | By |
