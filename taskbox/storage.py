@@ -42,7 +42,7 @@ def load_tasks(path: Path) -> Tuple[List[Task], int]:
         return [], 1
     try:
         data = json.loads(raw)
-    except json.JSONDecodeError as exc:
+    except (json.JSONDecodeError, RecursionError) as exc:
         raise StorageError("%s is not valid JSON (%s); fix or remove it" % (path, exc)) from exc
     if not isinstance(data, dict) or data.get("version") != FORMAT_VERSION:
         raise StorageError("%s has an unsupported format or version" % path)

@@ -92,6 +92,9 @@ class CorruptFileTests(StorageTestCase):
         with self.assertRaisesRegex(StorageError, "not valid JSON"):
             load_tasks(self.path)
 
+    def test_S3_deeply_nested_json_raises_storage_error(self):  # R6 negative
+        self.assert_rejected_and_untouched("[" * 200000, "not valid JSON")
+
 
 class ResolvePathTests(unittest.TestCase):
     def test_S4_cli_arg_wins_over_env(self):  # R6 happy
