@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="R1 happy: add habit trims name and assigns id" time="0.001782" classname="test"/>
+	<testcase name="R1 boundary: 60-char name and targets 1 and 7 accepted" time="0.000216" classname="test"/>
+	<testcase name="R1 negative: invalid name or target rejected, state not mutated" time="0.000617" classname="test"/>
+	<testcase name="R1 negative: duplicate name is case-insensitive" time="0.000185" classname="test"/>
+	<testcase name="R2 happy: edit, archive and restore keep data" time="0.000276" classname="test"/>
+	<testcase name="R2 boundary: renaming to its own name is allowed" time="0.000398" classname="test"/>
+	<testcase name="R2 negative: unknown id and duplicate rename rejected" time="0.000380" classname="test"/>
+	<testcase name="R3 happy: toggle twice returns to the original state" time="0.000465" classname="test"/>
+	<testcase name="R3 boundary: today allowed, tomorrow rejected, log kept sorted" time="0.000531" classname="test"/>
+	<testcase name="R3 negative: bad date or unknown habit rejected" time="0.000488" classname="test"/>
+	<testcase name="R4 happy: week of Fri 2026-11-27 runs Mon 11-23 to Sun 11-29" time="0.000383" classname="test"/>
+	<testcase name="R4 boundary: Sunday belongs to the previous Monday; month and leap-year math" time="0.000148" classname="test"/>
+	<testcase name="R4 boundary: weekCount counts only days inside the viewed week, ignoring duplicates" time="0.000185" classname="test"/>
+	<testcase name="R4 negative: invalid dates throw / are detected" time="0.000127" classname="test"/>
+	<testcase name="R4 happy: localDateString formats local date with padding" time="0.000908" classname="test"/>
+	<testcase name="R5 happy: 3-day run ending today" time="0.000192" classname="test"/>
+	<testcase name="R5 boundary: today not yet done keeps the run alive; a missed day resets it" time="0.000136" classname="test"/>
+	<testcase name="R5 negative: no logs gives 0 and 0; duplicates not double counted" time="0.000108" classname="test"/>
+	<testcase name="R6 happy: export then import round-trips equal state" time="0.003464" classname="test"/>
+	<testcase name="R6 boundary: empty state and archived flag survive; unknown extra fields are dropped" time="0.000964" classname="test"/>
+	<testcase name="R6 negative: malformed backups are rejected with a specific message" time="0.002086" classname="test"/>
+	<testcase name="R7 happy: save then load round-trips" time="0.000726" classname="test"/>
+	<testcase name="R7 boundary: empty storage gives empty state and no notice" time="0.000264" classname="test"/>
+	<testcase name="R7 negative: corrupt data is kept under a backup key, not lost" time="0.000276" classname="test"/>
+	<testcase name="R7 negative: invalid-but-parseable stored data is treated as corrupt" time="0.000404" classname="test"/>
+	<testcase name="R7 negative: throwing storage degrades without throwing" time="0.000279" classname="test"/>
+	<!-- tests 26 -->
+	<!-- suites 0 -->
+	<!-- pass 26 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 131.2841 -->
+</testsuites>

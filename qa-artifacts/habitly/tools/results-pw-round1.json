@@ -1,0 +1,1980 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\NinhLe\\AppData\\Local\\Temp\\claude\\1037569620d9bf32\\627a1706-2884-4f80-af5f-1f9c1a5f5068\\scratchpad\\pw\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "qa-artifacts/habitly/tools/e2e",
+      "--workers=1",
+      "--reporter=json,list"
+    ],
+    "configFile": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\playwright.config.js",
+    "rootDir": "E:/project/AI-skill/Test-skill/qa-artifacts/habitly/tools/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/NinhLe/AppData/Local/Temp/claude/1037569620d9bf32/627a1706-2884-4f80-af5f-1f9c1a5f5068/scratchpad/pw-out3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "E:/project/AI-skill/Test-skill/qa-artifacts/habitly/tools/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "*.spec.js"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\NinhLe\\AppData\\Local\\Temp\\claude\\1037569620d9bf32\\627a1706-2884-4f80-af5f-1f9c1a5f5068\\scratchpad\\pw-out3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e",
+        "snapshotDir": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e",
+        "testIgnore": [],
+        "testMatch": "*.spec.js",
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://localhost:8765",
+          "screenshot": "only-on-failure",
+          "trace": "off",
+          "browserName": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ],
+      [
+        "list"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "habitly.spec.js",
+      "file": "habitly.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "R1 add",
+          "file": "habitly.spec.js",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-ADD-001: adding a valid habit shows it with 0/target",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 296,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:13.063Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-7729089668e1251763a1",
+              "file": "habitly.spec.js",
+              "line": 14,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-002: name is trimmed before saving",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 230,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:13.491Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-05dda75ef641a3cc33e1",
+              "file": "habitly.spec.js",
+              "line": 21,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-003: whitespace-only name rejected, no row, nothing stored",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 217,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:13.735Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-a1ad1008949a0665f3b0",
+              "file": "habitly.spec.js",
+              "line": 27,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-004: 60-char name accepted",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 234,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:13.970Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-b70beefd18b18864cf37",
+              "file": "habitly.spec.js",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-005: typing a 61st character is cut off by the field",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 199,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:14.219Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-30c7c54a142dc712674b",
+              "file": "habitly.spec.js",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-007: targets 0, 8 and 2.5 are rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 287,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:14.432Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-2742694823a091c87ca2",
+              "file": "habitly.spec.js",
+              "line": 46,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-008: targets 1 and 7 accepted",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 240,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:14.732Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-ad420814747a82336951",
+              "file": "habitly.spec.js",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-009: duplicate name (case-insensitive) rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:14.984Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-f7cfcb9e72a100e8c06d",
+              "file": "habitly.spec.js",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-010: HTML in a name is shown as text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 217,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:15.252Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-fa39fb5a4b9b7716c188",
+              "file": "habitly.spec.js",
+              "line": 70,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-011: double-clicking Add habit adds one habit only",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "final status after double click: \"Name is required.\" class=error"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:15.483Z",
+                      "annotations": [
+                        {
+                          "type": "informational",
+                          "description": "final status after double click: \"Name is required.\" class=error"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-a9a973e8a589f82779ee",
+              "file": "habitly.spec.js",
+              "line": 76,
+              "column": 3
+            },
+            {
+              "title": "TC-ADD-012: 30 emoji (60 UTF-16 units) observed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "status: \"Habit added.\", rows: 1"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 218,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:15.698Z",
+                      "annotations": [
+                        {
+                          "type": "informational",
+                          "description": "status: \"Habit added.\", rows: 1"
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-6490dcd6642615225a58",
+              "file": "habitly.spec.js",
+              "line": 84,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R2 edit / archive",
+          "file": "habitly.spec.js",
+          "line": 91,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-EDIT-001: editing name and target saves both",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 288,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:15.933Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-e3fd41807f1ab69bfee6",
+              "file": "habitly.spec.js",
+              "line": 92,
+              "column": 3
+            },
+            {
+              "title": "TC-EDIT-002: cancel edit resets the form and changes nothing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 320,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:16.233Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-e7ab1c031eb685e618dc",
+              "file": "habitly.spec.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "TC-EDIT-003: archive hides, keeps data across reload, restore brings it back with its log",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 352,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:16.568Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-3dcfd6a87680345fcc0d",
+              "file": "habitly.spec.js",
+              "line": 114,
+              "column": 3
+            },
+            {
+              "title": "TC-EDIT-007: an archived name still blocks a new habit with the same name",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 320,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:16.933Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-773b543270a1c7d99934",
+              "file": "habitly.spec.js",
+              "line": 125,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R3 toggle",
+          "file": "habitly.spec.js",
+          "line": 134,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-TOG-001: clicking today marks done, updates count, status and streak",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 288,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:17.265Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-dda58e3d233c6f3eaca4",
+              "file": "habitly.spec.js",
+              "line": 135,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-002: toggling twice returns to the original state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 302,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:17.566Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-cf9280479b3a9f47cf5a",
+              "file": "habitly.spec.js",
+              "line": 145,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-003: done days survive a reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 269,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:17.882Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-bb7f154259f2e0c02465",
+              "file": "habitly.spec.js",
+              "line": 154,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-004: future-day cells are disabled (next week)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 270,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:18.166Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-5fca3afe6ec903719ed3",
+              "file": "habitly.spec.js",
+              "line": 162,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-006: year boundary with the clock fixed at 2026-01-01",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:18.450Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-07b208b96806244cbed6",
+              "file": "habitly.spec.js",
+              "line": 170,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-007: Space and Enter toggle a focused cell, focus stays",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:18.785Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-7451b32770625f4dae8d",
+              "file": "habitly.spec.js",
+              "line": 181,
+              "column": 3
+            },
+            {
+              "title": "TC-TOG-008: double-clicking a cell ends unpressed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 286,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:19.117Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-1cea8a55ef955bd4068a",
+              "file": "habitly.spec.js",
+              "line": 193,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R4 week",
+          "file": "habitly.spec.js",
+          "line": 201,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-WEEK-001: Mon-Sun headers and week label contain today",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 235,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:19.417Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-e0055c59fe566a7071ce",
+              "file": "habitly.spec.js",
+              "line": 202,
+              "column": 3
+            },
+            {
+              "title": "TC-WEEK-002: Previous / Next / This week move by 7 days and return",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 304,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:19.665Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-215979a772ba1ac40658",
+              "file": "habitly.spec.js",
+              "line": 211,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R5 streak",
+          "file": "habitly.spec.js",
+          "line": 230,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-STRK-003: no logs shows 0 / best 0",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 224,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:19.983Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-6aa42ac25fa325c880e1",
+              "file": "habitly.spec.js",
+              "line": 231,
+              "column": 3
+            },
+            {
+              "title": "TC-STRK-004: streak across the year boundary",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 302,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:20.221Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-0941a1eb4fd76c940ad2",
+              "file": "habitly.spec.js",
+              "line": 236,
+              "column": 3
+            },
+            {
+              "title": "TC-STRK-005: today undone, yesterday done keeps the streak",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 265,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:20.538Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-70acd6a5f6cc73844d0f",
+              "file": "habitly.spec.js",
+              "line": 245,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R6 backup",
+          "file": "habitly.spec.js",
+          "line": 255,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-BKP-002: Export JSON downloads habitly-backup-<date>.json",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 499,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:20.818Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-b18c19d5ef128b3bcd90",
+              "file": "habitly.spec.js",
+              "line": 256,
+              "column": 3
+            },
+            {
+              "title": "TC-BKP-003: valid backup imports into empty storage",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 172,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:21.333Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-f22495fa72a2a4dc038a",
+              "file": "habitly.spec.js",
+              "line": 269,
+              "column": 3
+            },
+            {
+              "title": "TC-BKP-004: import over existing data asks first, cancel keeps data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 235,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:21.519Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-829f9a800e7fe4400667",
+              "file": "habitly.spec.js",
+              "line": 277,
+              "column": 3
+            },
+            {
+              "title": "TC-BKP-005: accepting the confirm replaces data",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 235,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:21.769Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-36d00f2787df6658fe2e",
+              "file": "habitly.spec.js",
+              "line": 288,
+              "column": 3
+            },
+            {
+              "title": "TC-BKP-006: non-JSON file rejected, data unchanged",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 240,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:22.016Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-cb9e6e7919e42f2b5aa4",
+              "file": "habitly.spec.js",
+              "line": 297,
+              "column": 3
+            },
+            {
+              "title": "TC-BKP-007: wrong version and duplicate ids rejected",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 302,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:22.271Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-1126574b1b38ea78306d",
+              "file": "habitly.spec.js",
+              "line": 304,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R7 storage",
+          "file": "habitly.spec.js",
+          "line": 315,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-STO-002: empty storage starts empty with no notice",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 165,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:22.590Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-883063e9f5bdff907bea",
+              "file": "habitly.spec.js",
+              "line": 316,
+              "column": 3
+            },
+            {
+              "title": "TC-STO-003: corrupt JSON is kept under habitly.v1.corrupt with a notice",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 210,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:22.770Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-a2b67f203918da3ce10b",
+              "file": "habitly.spec.js",
+              "line": 321,
+              "column": 3
+            },
+            {
+              "title": "TC-STO-004: parseable but invalid data (version 2) treated as corrupt",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 258,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:22.998Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-398e71ce2328566c1681",
+              "file": "habitly.spec.js",
+              "line": 327,
+              "column": 3
+            },
+            {
+              "title": "TC-STO-005: a failing setItem is reported and the page keeps working",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 305,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:23.278Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-5d8cb057af9d1c671912",
+              "file": "habitly.spec.js",
+              "line": 334,
+              "column": 3
+            },
+            {
+              "title": "TC-STO-006: page opens when reading localStorage throws",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 5178,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveClass\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected pattern: \u001b[32m/error/\u001b[39m\nReceived string:  \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveClass\" getByRole('status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    14 × locator resolved to <p id=\"status\" role=\"status\" aria-live=\"polite\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveClass\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected pattern: \u001b[32m/error/\u001b[39m\nReceived string:  \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveClass\" getByRole('status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    14 × locator resolved to <p id=\"status\" role=\"status\" aria-live=\"polite\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at HabitlyPage.expectError (E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\pages\\HabitlyPage.js:53:31)\n    at E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\habitly.spec.js:347:13",
+                        "location": {
+                          "file": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\pages\\HabitlyPage.js",
+                          "column": 31,
+                          "line": 53
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages\\HabitlyPage.js:53\n\n \u001b[90m 51 |\u001b[39m   }\n \u001b[90m 52 |\u001b[39m   \u001b[36masync\u001b[39m expectError(text) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 53 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstatus)\u001b[33m.\u001b[39mtoHaveClass(\u001b[35m/error/\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 54 |\u001b[39m     \u001b[36mawait\u001b[39m expect(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstatus)\u001b[33m.\u001b[39mtoContainText(text)\u001b[33m;\u001b[39m\n \u001b[90m 55 |\u001b[39m   }\n \u001b[90m 56 |\u001b[39m }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\pages\\HabitlyPage.js",
+                            "column": 31,
+                            "line": 53
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveClass\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('status')\nExpected pattern: \u001b[32m/error/\u001b[39m\nReceived string:  \u001b[31m\"\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveClass\" getByRole('status') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('status')\u001b[22m\n\u001b[2m    14 × locator resolved to <p id=\"status\" role=\"status\" aria-live=\"polite\"></p>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n   at pages\\HabitlyPage.js:53\n\n  51 |   }\n  52 |   async expectError(text) {\n> 53 |     await expect(this.status).toHaveClass(/error/);\n     |                               ^\n  54 |     await expect(this.status).toContainText(text);\n  55 |   }\n  56 | }\n    at HabitlyPage.expectError (E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\pages\\HabitlyPage.js:53:31)\n    at E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\habitly.spec.js:347:13"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:23.605Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\NinhLe\\AppData\\Local\\Temp\\claude\\1037569620d9bf32\\627a1706-2884-4f80-af5f-1f9c1a5f5068\\scratchpad\\pw-out3\\habitly-R7-storage-TC-STO--65ed0-reading-localStorage-throws-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\NinhLe\\AppData\\Local\\Temp\\claude\\1037569620d9bf32\\627a1706-2884-4f80-af5f-1f9c1a5f5068\\scratchpad\\pw-out3\\habitly-R7-storage-TC-STO--65ed0-reading-localStorage-throws-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "E:\\project\\AI-skill\\Test-skill\\qa-artifacts\\habitly\\tools\\e2e\\pages\\HabitlyPage.js",
+                        "column": 31,
+                        "line": 53
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-93afd6a4c71ec3e375a1",
+              "file": "habitly.spec.js",
+              "line": 341,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "R8 a11y basics",
+          "file": "habitly.spec.js",
+          "line": 352,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TC-A11Y-001: keyboard reaches every control, each with a visible focus indicator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 366,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:29.317Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-4ff548684eac4b4b2ce0",
+              "file": "habitly.spec.js",
+              "line": 353,
+              "column": 3
+            },
+            {
+              "title": "TC-A11Y-002: cells are buttons with a name and pressed state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 226,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:29.823Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-d9ffd6f5eb72762b517b",
+              "file": "habitly.spec.js",
+              "line": 378,
+              "column": 3
+            },
+            {
+              "title": "TC-A11Y-003: status is a polite live region and updates without moving focus",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 205,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:30.062Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-9fcd6bdae5200f1252cd",
+              "file": "habitly.spec.js",
+              "line": 385,
+              "column": 3
+            },
+            {
+              "title": "TC-A11Y-004: 360px width has no page-level horizontal scroll",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 276,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-27T04:37:30.279Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2be41359be0c1bb5113c-a50f101405c4b283789e",
+              "file": "habitly.spec.js",
+              "line": 391,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "nonfunctional.spec.js",
+      "file": "nonfunctional.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "NF-PERF-01: 50 habits x 1095 days renders and toggles (Proposed < 1000 ms each)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "informational",
+                  "description": "state 716355 chars; reload to last row visible 187 ms; toggle to status 159 ms (proposed limit 1000 ms, unconfirmed -> Informational)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 548,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:30.572Z",
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "state 716355 chars; reload to last row visible 187 ms; toggle to status 159 ms (proposed limit 1000 ms, unconfirmed -> Informational)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-c5e5a0941f4b45c71563",
+          "file": "nonfunctional.spec.js",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "NF-PERF-02: storage quota reached -> error shown, page keeps working",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "informational",
+                  "description": "filler keys written until quota: 13"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 286,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:31.132Z",
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "filler keys written until quota: 13"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-cb35e114be4f45bbb195",
+          "file": "nonfunctional.spec.js",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "title": "NF-PERF-03: import of 1999000 chars is accepted",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "informational",
+                  "description": "import handled in 215 ms (proposed limit 3000 ms, unconfirmed)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 337,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:31.431Z",
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "import handled in 215 ms (proposed limit 3000 ms, unconfirmed)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-52bb978735723191c1a3",
+          "file": "nonfunctional.spec.js",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "NF-PERF-03: import of 2000100 chars is rejected as too large",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "informational",
+                  "description": "import handled in 219 ms (proposed limit 3000 ms, unconfirmed)"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 338,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:31.780Z",
+                  "annotations": [
+                    {
+                      "type": "informational",
+                      "description": "import handled in 219 ms (proposed limit 3000 ms, unconfirmed)"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-f4914fc18c2eee1959ff",
+          "file": "nonfunctional.spec.js",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "NF-SEC-01: hostile names stay text; __proto__ log key rejected",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:32.130Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-7115576f769c1005d435",
+          "file": "nonfunctional.spec.js",
+          "line": 77,
+          "column": 1
+        },
+        {
+          "title": "NF-COMP-01: no page-level horizontal scroll at 360x740",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 276,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:32.314Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-06aa12266f28dd000034",
+          "file": "nonfunctional.spec.js",
+          "line": 92,
+          "column": 3
+        },
+        {
+          "title": "NF-COMP-01: no page-level horizontal scroll at 768x1024",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:32.602Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-6609863c061978b8082e",
+          "file": "nonfunctional.spec.js",
+          "line": 92,
+          "column": 3
+        },
+        {
+          "title": "NF-COMP-01: no page-level horizontal scroll at 1280x800",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 295,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-27T04:37:32.894Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a97cbefe856308db9bba-97dd2d9b9d840449956d",
+          "file": "nonfunctional.spec.js",
+          "line": 92,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-27T04:37:12.381Z",
+    "duration": 20871.334000000003,
+    "expected": 49,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}
