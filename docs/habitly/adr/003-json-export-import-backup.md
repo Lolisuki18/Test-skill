@@ -12,9 +12,9 @@ Because data lives only in one browser ([001](001-localstorage-for-persistence.m
 ## Options Considered
 
 ### Option 1: Export and import the full state as one JSON file
-- Description: **Export JSON** downloads `habitly-backup-<date>.json` containing the state plus `exportedAt` (`habitly/src/ui/app.js:146-155`, `habitly/src/domain/backup.js:6-8`). **Import JSON file** parses and validates the file before anything is saved (`habitly/src/domain/backup.js:14-47`).
-- Pros: readable file; the same validation function is used for stored data and imported data (`habitly/src/storage.js:2,20`); a bad file changes nothing.
-- Cons: manual; replaces all current habits instead of merging (`habitly/src/ui/app.js:162`).
+- Description: **Export JSON** downloads `habitly-backup-<date>.json` containing the state plus `exportedAt` (`habitly/src/ui/app.js:164-173`, `habitly/src/domain/backup.js:6-8`). **Import JSON file** parses and validates the file before anything is saved (`habitly/src/domain/backup.js:14-47`).
+- Pros: readable file; the same validation function is used for stored data and imported data (`habitly/src/storage.js:2,29`); a bad file changes nothing.
+- Cons: manual; replaces all current habits instead of merging (`habitly/src/ui/app.js:180`).
 
 ### Option 2: No backup, or automatic cloud sync (Implied alternative, not recorded as considered)
 - Description: rely on the browser alone, or sync to a service.
@@ -24,7 +24,7 @@ Because data lives only in one browser ([001](001-localstorage-for-persistence.m
 
 ## Decision
 
-We provide manual JSON export and import. Import rejects, without touching stored data: a file over `2_000_000` characters, invalid JSON, a version other than `1`, and entries with bad ids, names, targets or dates, duplicate ids, or a log for an unknown habit (`habitly/src/domain/backup.js:4,14-47`). When habits already exist, the user must confirm before they are replaced (`habitly/src/ui/app.js:162`). Unknown extra fields are dropped on import (`habitly/src/domain/backup.js:28`; test `R6 boundary` in `habitly/tests/persistence.test.js`).
+We provide manual JSON export and import. Import rejects, without touching stored data: a file over `2_000_000` characters, invalid JSON, a version other than `1`, and entries with bad ids, names, targets or dates, duplicate ids, or a log for an unknown habit (`habitly/src/domain/backup.js:4,14-47`). When habits already exist, the user must confirm before they are replaced (`habitly/src/ui/app.js:180`). Unknown extra fields are dropped on import (`habitly/src/domain/backup.js:28`; test `R6 boundary` in `habitly/tests/persistence.test.js`).
 
 ## Consequences / Trade-offs
 

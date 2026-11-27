@@ -31,5 +31,5 @@ sequenceDiagram
 
 The file input is cleared at the end in every branch (`ev.target.value = ''`).
 
-Evidence: `habitly/src/ui/app.js:157-172`, `habitly/src/domain/backup.js:14-47`, `habitly/src/storage.js:32-39`.
+Evidence: `habitly/src/ui/app.js:175-190`, `habitly/src/domain/backup.js:14-47`, `habitly/src/storage.js:41-48`.
 Not rendered in this session (no Mermaid renderer available); syntax checked by hand.

@@ -11,7 +11,7 @@ flowchart LR
   app --> dates["domain/dates.js<br/>localDateString, weekDays, addDays"]
   app --> streaks["domain/streaks.js<br/>currentStreak, bestStreak, weekCount"]
   app --> backup["domain/backup.js<br/>serialize, parseBackup"]
-  app --> storage["storage.js<br/>load, save"]
+  app --> storage["storage.js<br/>getStore, load, save"]
   habits --> dates
   streaks --> dates
   backup --> dates
@@ -24,7 +24,7 @@ flowchart LR
 
 *Figure 1: Architecture - habitly modules*
 
-`src/storage.js` receives the storage object as an argument (`load(store)`, `save(store, state)`); `app.js` passes `localStorage` (`habitly/src/ui/app.js:24,174`). Nothing in `src/domain/` touches the DOM or `localStorage`.
+`src/storage.js` receives the storage object as an argument (`load(store)`, `save(store, state)`); `app.js` asks `getStore()` for the storage object once at start (`habitly/src/ui/app.js:13`); `getStore` returns `null` when even reading `window.localStorage` throws, and `load(null)` / `save(null, ...)` then behave like unavailable storage (`habitly/src/storage.js:8-14`), and `app.js` passes that value on (`habitly/src/ui/app.js:25,192`). Nothing in `src/domain/` touches the DOM or `localStorage`.
 
-Evidence: `habitly/src/ui/app.js:1-5`, `habitly/src/storage.js:1-5`, `habitly/src/domain/backup.js:1-2`, `habitly/src/domain/habits.js:1`, `habitly/src/domain/streaks.js:1`, `habitly/index.html:61`, `habitly/src/ui/app.js:146-155`.
+Evidence: `habitly/src/ui/app.js:1-5`, `habitly/src/storage.js:1-5`, `habitly/src/domain/backup.js:1-2`, `habitly/src/domain/habits.js:1`, `habitly/src/domain/streaks.js:1`, `habitly/index.html:61`, `habitly/src/ui/app.js:164-173`.
 Not rendered in this session (no Mermaid renderer available); syntax checked by hand.

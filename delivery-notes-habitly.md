@@ -1,6 +1,6 @@
 # Delivery notes - habitly: fix of DEF-001..DEF-004 to release
 
-Build under test (commit): 1a50381
+Build under test (commit): 1a50381 (QA round 2 commit 3b16ca0 on top; docs/release commit after it)
 Base branch: [Needs input: PR base branch; `main` and `origin/main` exist, `feat/habitly` is unmerged]
 Version/tag: none (habitly/package.json:3 declares 1.0.0)
 
@@ -50,6 +50,23 @@ Not run / failing items: TC-WEEK-005 (midnight, needs a person), TC-BKP-010 (OS 
 Defects: DEF-001..DEF-004 re-tested Pass and closed by the user ("close DEF-001, DEF-002, DEF-003, DEF-004"), 2026-11-27.
 Skipped skills (reason): qa-api-tester (no endpoints), qa-nonfunctional-writer (no 02b change; NF checks ran inside the Playwright run), qa-test-plan-writer / qa-test-matrix-writer (no change).
 
+## Stage 4 - Docs - 2026-11-27 - status: Done (branch A, Phase 4 checklist; docs-sync-auditor not run as a separate audit)
+Artifacts: habitly/README.md (storage/tests/styles lines, Testing section as of 1a50381), docs/habitly/user-guide.md (record of changes, field outline sentence, storage message row), docs/habitly/diagrams/architecture-habitly.md (+getStore node and sentence), docs/habitly/diagrams/sequence-import-backup.md (line refs), docs/habitly/adr/001..003 (line refs; 001 +one sentence on getStore), docs/_evidence-habitly.md (commit, test count, 3 new fact rows). Evidence file kept at its existing path `docs/_evidence-habitly.md` (user chose to keep it; CONVENTIONS section 5 would put it at `docs/habitly/_evidence.md`).
+Real results: `node --test` -> `tests 33 pass 33 fail 0`; every `file:line` reference to `src/storage.js`, `src/ui/app.js` in docs re-derived after the edits (content of each referenced line read back; old-to-new mapping by diff against 8ec8923); new user-guide claims checked against the Playwright `NF-A11Y-01 (round 2)` run and the built-in pane probe.
+Open items: Mermaid diagrams not rendered (no renderer); `[Needs input]` items in README/user guide unchanged (license, supported browsers, author); docs-sync-auditor not run.
+Skipped skills (reason): api-doc-writer (no API), runbook-writer (static page, no ops), srs-sdd-writer/pm-report-writer/review2-pack-writer (not a course project), adr-writer (no new decision recorded).
+
+## Stage 5 - Release - 2026-11-27 - status: Done as preparation only (no tag, no deploy, no push)
+Artifacts: habitly/CHANGELOG.md (Unreleased: +Fixed), docs/habitly/release-notes.md (+Fixes before the first release, +Known limitations). `runbook-writer` and `ci-cd-setup` not used (static page, no deploy target, no CI file in habitly/).
+Real results: range read: no tags; branch commits 8ec8923 (feat), e033d36 (docs/qa), 1a50381 (fix), 3b16ca0 (qa): 4 read; e033d36 and 3b16ca0 omitted from the changelog on purpose.
+Release verdict (QA recommendation, decision is the user's): Conditional Go; condition left: the user runs TC-WEEK-005, TC-BKP-010, TC-A11Y-005 and reports (a Fail makes it No-Go).
+Open items: version 1.0.0 (habitly/package.json:3) kept, release date `[Needs input: release date]`; PR base `[Needs input]`; PR not opened, nothing pushed.
+
 ## Decisions
 | Date | Decision | By |
 |---|---|---|
+| 2026-11-27 | Continue from existing habitly artifacts; all four skill sets installed | user |
+| 2026-11-27 | Fix all four defects as proposed; commit when done | user (ok at bug-investigator hard stop) |
+| 2026-11-27 | Accept missing automated test for DEF-004 until QA round 2 (added there) | user (Stage 2 stop) |
+| 2026-11-27 | Close DEF-001..DEF-004 after round-2 Pass; accept Conditional Go with 3 Not Run cases | user (Stage 3 stop) |
+| 2026-11-27 | Keep evidence file at docs/_evidence-habitly.md; keep version 1.0.0, date left as placeholder | user |

@@ -5,6 +5,7 @@
 | Date | A* / M, D | In charge | Change Description |
 |---|---|---|---|
 | 2026-11-27 | A | `[Needs input: author]` | First version, written for habitly 1.0.0 (commit `8ec8923`). |
+| 2026-11-27 | M | `[Needs input: author]` | Updated for commit `1a50381`: a rejected box is outlined and gets the cursor (3.2); the page also opens when the browser blocks site data (3.9). |
 
 *A - Added, M - Modified, D - Deleted
 
@@ -77,7 +78,7 @@ Who can use it: anyone who opens the page. There are no accounts or roles.
 | A habit with this name already exists. | Names are compared without regard to capital letters ("Read" and "read" are the same). Choose a different name. |
 | Target must be a whole number from 1 to 7. | Enter 1, 2, 3, 4, 5, 6 or 7. An empty box, 0, 8 and 2.5 are rejected. |
 
-When a message like this appears, nothing is added or changed.
+When a message like this appears, nothing is added or changed. The box that caused the message gets a thicker red outline and the cursor moves into it (the Name box for name problems, the Target box for target problems); the outline goes away at the next submit.
 
 [Screenshot: Add a habit form - a red error message under the title - circle in red: the status line]
 
@@ -167,7 +168,7 @@ If the file cannot be used, you see "Import failed, your data is unchanged: <rea
 | You see | What it means |
 |---|---|
 | Saved data was unreadable. A copy was kept; starting empty. | When the page opened, the saved habits could not be read. The page starts with no habits and keeps a copy of the unreadable data in the browser. `[Needs input: how a user can get at that copy - no screen offers it]` |
-| Storage is unavailable; changes will not be saved. | Your browser does not let the page save data. You can still use the page, but your habits are gone when you close it. |
+| Storage is unavailable; changes will not be saved. | Your browser does not let the page save data, for example when it blocks site data. The page still opens and you can use it, but your habits are gone when you close it. After you add a habit you may see "Could not save to this browser; changes will be lost on reload." for the same reason. |
 | Could not save to this browser; changes will be lost on reload. | A change could not be saved. Export a backup if you can, because a reload will lose the change. |
 
 #### 3.10 Using the keyboard

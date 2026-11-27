@@ -48,11 +48,11 @@ and open http://localhost:8099/ instead.
 
 ```text
 index.html          page shell: forms, week grid, archived list, backup controls
-styles.css          layout, colours, focus styles, narrow-screen rules
+styles.css          layout, colour tokens, focus styles, narrow-screen rules
 src/domain/         pure logic with no DOM: dates, habits, streaks, backup validation
-src/storage.js      load/save wrapper around a localStorage-like object
+src/storage.js      getStore (reads window.localStorage safely), load/save wrapper around a localStorage-like object
 src/ui/app.js       DOM wiring and rendering
-tests/              node:test suites (domain.test.js, persistence.test.js)
+tests/              node:test suites (domain.test.js, persistence.test.js, contrast.test.js)
 ```
 
 Notes:
@@ -67,7 +67,7 @@ Run in a terminal inside the `habitly/` folder:
 node --test
 ```
 
-The suites cover the domain functions, backup validation and storage. They do not drive the browser page. As of commit `8ec8923` all tests pass.
+The suites cover the domain functions, backup validation, storage and the colour contrast of the tokens in `styles.css`. They do not drive the browser page. As of commit `1a50381` all tests pass.
 
 ## Documentation
 

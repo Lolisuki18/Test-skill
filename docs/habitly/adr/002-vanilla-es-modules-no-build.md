@@ -14,7 +14,7 @@ The page is one HTML file that loads one module script (`habitly/index.html:61`)
 ### Option 1: Plain ES modules served as static files
 - Description: the browser loads `src/ui/app.js`, which imports the other modules by relative path (`habitly/src/ui/app.js:1-5`).
 - Pros: nothing to install or compile; any static server works; the same files run in the browser and in Node tests.
-- Cons: no bundling, no type checking, no framework helpers; DOM building is hand-written (`el()` in `habitly/src/ui/app.js:29-37`).
+- Cons: no bundling, no type checking, no framework helpers; DOM building is hand-written (`el()` in `habitly/src/ui/app.js:30-38`).
 
 ### Option 2: A framework and/or bundler (Implied alternative, not recorded as considered)
 - Description: use a UI framework with a build tool.
