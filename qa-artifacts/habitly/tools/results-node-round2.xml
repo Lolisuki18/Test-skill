@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testcase name="R8 DEF-003: control border token is at least 3:1 against the page (light)" time="0.001074" classname="test"/>
+	<testcase name="R8 DEF-002: check mark on a done cell is at least 4.5:1 (light)" time="0.000161" classname="test"/>
+	<testcase name="R8 DEF-003: control border token is at least 3:1 against the page (dark)" time="0.000874" classname="test"/>
+	<testcase name="R8 DEF-002: check mark on a done cell is at least 4.5:1 (dark)" time="0.000197" classname="test"/>
+	<testcase name="R8 DEF-003: input and day-cell borders use --control-line, not the decorative --line" time="0.000321" classname="test"/>
+	<testcase name="R1 happy: add habit trims name and assigns id" time="0.002430" classname="test"/>
+	<testcase name="R1 boundary: 60-char name and targets 1 and 7 accepted" time="0.000315" classname="test"/>
+	<testcase name="R1 negative: invalid name or target rejected, state not mutated" time="0.000671" classname="test"/>
+	<testcase name="R1 negative: duplicate name is case-insensitive" time="0.000253" classname="test"/>
+	<testcase name="R2 happy: edit, archive and restore keep data" time="0.000343" classname="test"/>
+	<testcase name="R2 boundary: renaming to its own name is allowed" time="0.000224" classname="test"/>
+	<testcase name="R2 negative: unknown id and duplicate rename rejected" time="0.000364" classname="test"/>
+	<testcase name="R3 happy: toggle twice returns to the original state" time="0.000507" classname="test"/>
+	<testcase name="R3 boundary: today allowed, tomorrow rejected, log kept sorted" time="0.000589" classname="test"/>
+	<testcase name="R3 negative: bad date or unknown habit rejected" time="0.000629" classname="test"/>
+	<testcase name="R4 happy: week of Fri 2026-11-27 runs Mon 11-23 to Sun 11-29" time="0.000632" classname="test"/>
+	<testcase name="R4 boundary: Sunday belongs to the previous Monday; month and leap-year math" time="0.000152" classname="test"/>
+	<testcase name="R4 boundary: weekCount counts only days inside the viewed week, ignoring duplicates" time="0.000222" classname="test"/>
+	<testcase name="R4 negative: invalid dates throw / are detected" time="0.000150" classname="test"/>
+	<testcase name="R4 happy: localDateString formats local date with padding" time="0.001794" classname="test"/>
+	<testcase name="R5 happy: 3-day run ending today" time="0.000222" classname="test"/>
+	<testcase name="R5 boundary: today not yet done keeps the run alive; a missed day resets it" time="0.000146" classname="test"/>
+	<testcase name="R5 negative: no logs gives 0 and 0; duplicates not double counted" time="0.000109" classname="test"/>
+	<testcase name="R6 happy: export then import round-trips equal state" time="0.003631" classname="test"/>
+	<testcase name="R6 boundary: empty state and archived flag survive; unknown extra fields are dropped" time="0.000448" classname="test"/>
+	<testcase name="R6 negative: malformed backups are rejected with a specific message" time="0.001211" classname="test"/>
+	<testcase name="R7 happy: save then load round-trips" time="0.000494" classname="test"/>
+	<testcase name="R7 boundary: empty storage gives empty state and no notice" time="0.000224" classname="test"/>
+	<testcase name="R7 negative: corrupt data is kept under a backup key, not lost" time="0.000220" classname="test"/>
+	<testcase name="R7 negative: invalid-but-parseable stored data is treated as corrupt" time="0.000250" classname="test"/>
+	<testcase name="R7 negative: throwing storage degrades without throwing" time="0.000192" classname="test"/>
+	<testcase name="R7 negative: getStore returns null when reading localStorage throws (DEF-001)" time="0.000558" classname="test"/>
+	<testcase name="R7 happy: getStore returns the host storage when available (DEF-001)" time="0.000423" classname="test"/>
+	<!-- tests 33 -->
+	<!-- suites 0 -->
+	<!-- pass 33 -->
+	<!-- fail 0 -->
+	<!-- cancelled 0 -->
+	<!-- skipped 0 -->
+	<!-- todo 0 -->
+	<!-- duration_ms 147.1538 -->
+</testsuites>

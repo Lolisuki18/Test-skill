@@ -1,7 +1,7 @@
 # Execution Notes — habitly 1.0.0
 - **Phase:** 3/5 — Execution
 - **Date:** 2026-11-27
-- **Version:** v0.1 (round 1)
+- **Version:** v0.2 (round 2 appended; round 1 kept unchanged above)
 - **Status:** Draft
 - **Requirement source:** `qa-artifacts/habitly/02-test-matrix.md` (v0.3, Approved), `02b-nonfunctional.md` (Approved)
 - **Approver:** [Needs input: approver name]
@@ -187,3 +187,98 @@ Timings are `Informational`: the 02b thresholds were `Proposed`, and the user's 
 - `qa-api-tester`: Not applicable: no endpoints. habitly is a static page that talks only to `localStorage` (no router, no OpenAPI, no `fetch`); `python -m http.server` only serves the files. The 13 `Auto (API)` cases are the developer's `node --test` suites ("automated non-UI run") and were run here through the repo's own tooling.
 - `qa-regression-planner`: skipped, no defect has been fixed yet (it needs a new build to select a regression set).
 - `qa-nonfunctional-writer`: used (02b design, section 3b results). `qa-accessibility-auditor`: used (`03c-accessibility.md`).
+
+---
+
+# Round 2 — re-test of the fix (build 1a50381)
+- **Date:** 2026-11-27 | **Build/commit:** 1a50381 (`feat/habitly`, fix of DEF-001..DEF-004 on top of e033d36) | **Runner:** Claude (QA agent)
+- **Scope:** `qa-lifecycle` Phases 1-2 not repeated (R1..R8 and the matrix v0.3 are unchanged; no case added or removed). Phase 3-5 re-run as `[QA Phase 3/5: Execution — Re-test round 2]`. Regression plan: `04b-regression-plan.md` (full automated run chosen: the change touches `storage.js`, `app.js` and `styles.css`, which every browser case uses).
+
+## R2.1 Run info
+- Environment actually used: Windows 11 Pro 10.0.26200; Git Bash; Node v22.23.2; Python 3.14.6 (`python -m http.server 8791` from `habitly/`); Playwright 1.65.1 with Chromium (headless, installed outside the repo, `NODE_PATH` set); built-in browser pane (360x740, dark colour scheme, desktop app pane) for the manual case and a keyboard/360px/contrast probe. The user's own browser: `[Needs input]`.
+- Browser tool choice: Playwright for `Auto (browser)`; built-in pane for `TC-EDIT-006` and the probe. Both worked.
+- Harness changes (QA-owned, not product): `tools/e2e/nonfunctional.spec.js` gained 3 tests for `NF-A11Y-01 (round 2)`; `tools/build_notes.py` reads `ROUND` (default 1) so round-1 files stay as they were. The 3 new tests FAIL on the pre-fix build (e033d36 served on port 8792: input border 1.58/1.61, check mark 2.22 dark, `aria-invalid` missing; `3 failed`) and pass on 1a50381.
+
+## R2.2 Commands and real output
+```text
+playwright test -c qa-artifacts/habitly/tools/e2e --workers=1 --reporter=json,line   (BASE_URL=http://localhost:8791)
+  53 passed (15.9s)      stats: expected 53, unexpected 0, flaky 0, skipped 0   (50 round-1 specs, of which TC-STO-006 failed in round 1 and passes now, + 3 new NF-A11Y-01 specs; file results-pw-round2.json)
+node --test (in habitly/)        # JUnit: results-node-round2.xml, 33 testcases
+  tests 33 / pass 33 / fail 0   (26 round-1 tests + 2 getStore + 5 contrast tests added by the fix commit)
+ROUND=2 python qa-artifacts/habitly/tools/build_notes.py
+  {"total": 59, "Pass": 55, "Informational": 1, "Not Run": 3, "byPrio": {"P0/Pass": 8, "P1/Pass": 24, "P2/Not Run": 1, "P2/Pass": 18, "P3/Informational": 1, "P3/Not Run": 2, "P3/Pass": 5}}
+```
+Built-in pane probe (360x740, dark): `input border 3.71 cell border 3.71 check 8.55`; blank name then Add -> status `Name is required.`, class `error`, `aria-invalid="true"`, `aria-describedby="status"`, focus on `habit-name`; `Meditate` typed and Enter pressed -> `Habit added.`, 1 row; today's cell clicked -> `Meditate done on 2026-11-27.`, focus stays on the cell; `scrollWidth 360 = clientWidth 360`.
+
+## R2.3 Results per test case (round 2, all 59 rows)
+| TC ID | Execution Type | Result (Pass/Fail/Blocked/Not Run/Informational) | Run date | Defect ID | Evidence/Notes |
+|---|---|---|---|---|---|
+| TC-ADD-001 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-001` |
+| TC-ADD-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-002` |
+| TC-ADD-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-003` |
+| TC-ADD-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-004` |
+| TC-ADD-005 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-005` |
+| TC-ADD-006 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R1 negative: invalid name or target rejected, state not mutated |
+| TC-ADD-007 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-007` |
+| TC-ADD-008 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-008` |
+| TC-ADD-009 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-009` |
+| TC-ADD-010 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-010` |
+| TC-ADD-011 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-ADD-011`; observed: final status after double click: "Name is required." class=error |
+| TC-ADD-012 | Auto (browser) | Informational | 2026-11-27 | - | Playwright `TC-ADD-012`; observed: status: "Habit added.", rows: 1 |
+| TC-EDIT-001 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-EDIT-001` |
+| TC-EDIT-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-EDIT-002` |
+| TC-EDIT-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-EDIT-003` |
+| TC-EDIT-004 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R2 negative: unknown id and duplicate rename rejected |
+| TC-EDIT-005 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R2 boundary: renaming to its own name is allowed |
+| TC-EDIT-006 | Manual | Pass | 2026-11-27 | - | round 2, built-in browser pane 360x740 (dark), build 1a50381: Edit Meditate, typed `lost` (field `Meditatelost`, button `Save changes`), reloaded: field empty, button `Add habit`, stored habits [`Meditate`]. No unsaved-edit warning (Informational) |
+| TC-EDIT-007 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-EDIT-007` |
+| TC-TOG-001 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-001` |
+| TC-TOG-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-002` |
+| TC-TOG-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-003` |
+| TC-TOG-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-004` |
+| TC-TOG-005 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R3 boundary: today allowed, tomorrow rejected, log kept sorted; R3 negative: bad date or unknown habit rejected |
+| TC-TOG-006 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-006` |
+| TC-TOG-007 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-007` |
+| TC-TOG-008 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-TOG-008` |
+| TC-WEEK-001 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-WEEK-001` |
+| TC-WEEK-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-WEEK-002` |
+| TC-WEEK-003 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R4 happy: week of Fri 2026-11-27 runs Mon 11-23 to Sun 11-29; R4 boundary: Sunday belongs to the previous Monday; month and leap-year math |
+| TC-WEEK-004 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R4 boundary: weekCount counts only days inside the viewed week, ignoring duplicates; R4 negative: invalid dates throw / are detected |
+| TC-WEEK-005 | Manual | Not Run | 2026-11-27 | - | needs the tab to stay open across local midnight (not run by the agent) |
+| TC-STRK-001 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R5 happy: 3-day run ending today |
+| TC-STRK-002 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R5 boundary: today not yet done keeps the run alive; a missed day resets it |
+| TC-STRK-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STRK-003` |
+| TC-STRK-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STRK-004` |
+| TC-STRK-005 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STRK-005` |
+| TC-BKP-001 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R6 happy: export then import round-trips equal state |
+| TC-BKP-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-002` |
+| TC-BKP-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-003` |
+| TC-BKP-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-004` |
+| TC-BKP-005 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-005` |
+| TC-BKP-006 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-006` |
+| TC-BKP-007 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-BKP-007` |
+| TC-BKP-008 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R6 negative: malformed backups are rejected with a specific message |
+| TC-BKP-009 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R6 boundary: empty state and archived flag survive; unknown extra fields are dropped |
+| TC-BKP-010 | Manual | Not Run | 2026-11-27 | - | needs the real OS file chooser / download dialog (not drivable by the agent); run script below |
+| TC-STO-001 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R7 happy: save then load round-trips |
+| TC-STO-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STO-002` |
+| TC-STO-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STO-003` |
+| TC-STO-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STO-004` |
+| TC-STO-005 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STO-005` |
+| TC-STO-006 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-STO-006` |
+| TC-STO-007 | Auto (API) | Pass | 2026-11-27 | - | node:test (JUnit): R7 negative: corrupt data is kept under a backup key, not lost; R7 negative: invalid-but-parseable stored data is treated as corrupt; R7 negative: throwing storage degrades without throwing |
+| TC-A11Y-001 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-A11Y-001` |
+| TC-A11Y-002 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-A11Y-002` |
+| TC-A11Y-003 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-A11Y-003` |
+| TC-A11Y-004 | Auto (browser) | Pass | 2026-11-27 | - | Playwright `TC-A11Y-004` |
+| TC-A11Y-005 | Manual | Not Run | 2026-11-27 | - | needs a real screen reader on a real device; not available to the agent |
+
+Totals (computed by `tools/build_notes.py` from the reports): {"total": 59, "Pass": 55, "Informational": 1, "Not Run": 3, "byPrio": {"P0/Pass": 8, "P1/Pass": 24, "P2/Not Run": 1, "P2/Pass": 18, "P3/Informational": 1, "P3/Not Run": 2, "P3/Pass": 5}}
+
+Formula: Total 59; Informational (1) excluded from rates; Passed 55; Pass rate = 55/58 = 94.8%; Executed rate = (55 + 0)/58 = 94.8%. Changes against round 1: `TC-STO-006` Fail -> Pass (DEF-001); `TC-EDIT-006` re-run by hand, Pass; every other case unchanged (Pass / Not Run / Informational). No new failures.
+
+## R2.4 Not Run: needs person or device (unchanged from round 1)
+- `TC-WEEK-005`: tab open across local midnight. `TC-BKP-010`: real OS file chooser and download dialog. `TC-A11Y-005`: real screen reader. Run script: section 6 above, unchanged.
+
+## R2.5 Skills considered and skipped (handover note)
+- `qa-api-tester`: not applicable (no endpoints; see section 7). `qa-nonfunctional-writer`: not re-run (NF performance, security and compatibility checks are inside the 53 Playwright passes; no 02b change). `qa-accessibility-auditor`: used, see `03c-accessibility.md` Round 2. `qa-test-plan-writer` and `qa-test-matrix-writer`: not re-run, no requirement or case change.

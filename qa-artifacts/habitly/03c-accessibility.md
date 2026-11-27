@@ -1,7 +1,7 @@
 # Accessibility Audit — habitly 1.0.0
 - **Phase:** 3/5 — Execution (accessibility)
 - **Date:** 2026-11-27
-- **Version:** v0.1
+- **Version:** v0.2 (round 2 appended)
 - **Status:** Draft
 - **Requirement source:** R8 in `plan/003-habitly.md`; NF-A11Y-01 in `qa-artifacts/habitly/02b-nonfunctional.md` (Approved)
 - **Approver:** [Needs input: approver name]
@@ -64,3 +64,17 @@ Automated results: none (no scanner run). All findings above come from code, DOM
 
 ## 5. Next step
 Log A11Y-F1..F3 as defects (done in `04-defects.md`: DEF-002, DEF-003, DEF-004); fixes go through the developer workflow. Re-run this file after a fix.
+
+---
+
+# Round 2 — re-check of A11Y-F1..F3 (build 1a50381)
+- Date: 2026-11-27. Environment: same as round 1 except Playwright run with `--workers=1` against `python -m http.server 8791`; built-in browser pane 360x740 in dark scheme. Code reviewed: `habitly/styles.css` (`--control-line`, `--done-fg`, `input[aria-invalid=true]`), `habitly/src/ui/app.js` (`clearInvalid`, `markInvalid`).
+
+| ID | Round 1 | Round 2 result | Evidence |
+|---|---|---|---|
+| A11Y-F1 (DEF-002) check mark, dark | 2.22:1 | 8.55:1 dark, 5.35:1 light (need 4.5) - fixed | Playwright `NF-A11Y-01 (round 2)` light and dark passed; built-in pane `check 8.55` |
+| A11Y-F2 (DEF-003) control borders | 1.58 light, 1.61 dark | input and empty cell 3.49:1 light, 3.71:1 dark (need 3) - fixed | same tests; pane `input border 3.71 cell border 3.71` |
+| A11Y-F3 (DEF-004) error not tied to field | `aria-invalid` null, `aria-describedby` null | `aria-invalid="true"`, `aria-describedby="status"`, focus on the offending field (name and target); cleared after a valid submit - fixed | Playwright `NF-A11Y-01 (round 2): invalid submit marks the field...` passed; pane probe |
+
+Regression checks run (round 2): keyboard Tab walk `TC-A11Y-001`, focus visible, `aria-pressed` cells `TC-A11Y-002`, live region `TC-A11Y-003`, 360 px reflow `TC-A11Y-004` and `NF-COMP-01` at 360/768/1280: all Pass in the full Playwright run (53 passed). Text contrast of the other pairs was not re-measured this round (round 1 values were 5.35:1 or higher; no colour token other than `--control-line`, `--done-fg` and the invalid-field border changed). The invalid-field border uses `--err`: 6.30:1 light (#b42318 on #fafafa) and 7.90:1 dark (#ff8a80 on #16161a), computed from the token values with the same WCAG formula (node one-liner), not read from the rendered page; both are at least 3:1.
+Not Run (unchanged): screen reader (`TC-A11Y-005`), zoom 200%, text spacing, focus not obscured, native dialogs by keyboard, forced-colors, touch device, other browsers.

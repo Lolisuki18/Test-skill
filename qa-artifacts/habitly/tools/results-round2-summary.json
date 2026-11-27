@@ -1,0 +1,15 @@
+{
+ "total": 59,
+ "Pass": 55,
+ "Informational": 1,
+ "Not Run": 3,
+ "byPrio": {
+  "P0/Pass": 8,
+  "P1/Pass": 24,
+  "P2/Not Run": 1,
+  "P2/Pass": 18,
+  "P3/Informational": 1,
+  "P3/Not Run": 2,
+  "P3/Pass": 5
+ }
+}

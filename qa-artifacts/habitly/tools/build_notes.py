@@ -3,12 +3,13 @@
 (Playwright JSON + node:test JUnit) and the matrix. Nothing is typed by hand: a case with no result
 in any report is 'Not Run'. Run from repo root: python qa-artifacts/habitly/tools/build_notes.py
 Round info is kept in ROUND below."""
-import json, re, sys
+import json, os, re, sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 T = Path(__file__).resolve().parent
 ART = T.parent
+ROUND = os.environ.get("ROUND", "1")
 DATE = "2026-11-27"
 DEFECT_FOR = {"TC-STO-006": "DEF-001"}  # linked after Phase 4
 MANUAL_REASON = {
@@ -34,6 +35,8 @@ NODE_MAP = {
 }
 # Manual cases the agent really executed in the built-in browser pane (evidence quoted in 03-execution-notes.md section 4)
 MANUAL_DONE = {"TC-EDIT-006": ("Pass", "built-in browser pane: Edit Meditate, typed `lost` (field `Meditatelost`, button `Save changes`), reloaded: field empty, button `Add habit`, both habits intact in localStorage. No unsaved-edit warning shown (Informational)")}
+if ROUND == "2":
+    MANUAL_DONE["TC-EDIT-006"] = ("Pass", "round 2, built-in browser pane 360x740 (dark), build 1a50381: Edit Meditate, typed `lost` (field `Meditatelost`, button `Save changes`), reloaded: field empty, button `Add habit`, stored habits [`Meditate`]. No unsaved-edit warning (Informational)")
 INFORMATIONAL = {"TC-ADD-012"}  # Oracle: none
 
 matrix = (ART / "02-test-matrix.md").read_text(encoding="utf-8")
@@ -43,7 +46,7 @@ for line in matrix.splitlines():
         c = [x.strip() for x in line.strip("|").split(" | ")]
         cases.append({"id": c[0], "prio": c[9], "type": c[10].rstrip(" |")})
 
-pw = json.loads((T / "results-pw-round1.json").read_text(encoding="utf-8"))
+pw = json.loads((T / f"results-pw-round{ROUND}.json").read_text(encoding="utf-8"))
 pw_res = {}
 def walk(s):
     for sp in s.get("specs", []):
@@ -55,7 +58,7 @@ def walk(s):
 for s in pw["suites"]: walk(s)
 
 node = {}
-for tc in ET.parse(T / "results-node-round1.xml").getroot().iter("testcase"):
+for tc in ET.parse(T / f"results-node-round{ROUND}.xml").getroot().iter("testcase"):
     node[tc.get("name")] = "fail" if tc.find("failure") is not None else "pass"
 
 rows, tally = [], {}
@@ -91,7 +94,7 @@ for c in cases:
 
 tot = {}
 for c in cases: tot[c["res"]] = tot.get(c["res"], 0) + 1
-(T / "results-round1-table.md").write_text("\n".join(rows) + "\n", encoding="utf-8")
+(T / f"results-round{ROUND}-table.md").write_text("\n".join(rows) + "\n", encoding="utf-8")
 summary = {"total": len(cases), **tot, "byPrio": {f"{p}/{r}": n for (p, r), n in sorted(tally.items())}}
-(T / "results-round1-summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
+(T / f"results-round{ROUND}-summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
 print(json.dumps(summary))

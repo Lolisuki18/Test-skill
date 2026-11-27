@@ -98,3 +98,51 @@ for (const [w, hgt] of [[360, 740], [768, 1024], [1280, 800]]) {
     expect(m.sw, JSON.stringify(m)).toBeLessThanOrEqual(m.cw);
   });
 }
+
+// Round 2 (build 1a50381): re-check of NF-A11Y-01 findings A11Y-F1..F3 (DEF-002, DEF-003, DEF-004). Same case, automated for the re-test.
+const CONTRAST_JS = () => {
+  const parse = (s) => { const m = s.match(/[\d.]+/g).map(Number); return { r: m[0], g: m[1], b: m[2], a: m.length > 3 ? m[3] : 1 }; };
+  const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+  const L = (c) => 0.2126 * lin(c.r) + 0.7152 * lin(c.g) + 0.0722 * lin(c.b);
+  const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const bg = parse(getComputedStyle(document.body).backgroundColor);
+  const cs = (s) => getComputedStyle(document.querySelector(s));
+  const pressed = document.querySelector('.cell[aria-pressed=true]');
+  return {
+    input: ratio(parse(cs('#habit-name').borderTopColor), bg),
+    cell: ratio(parse(cs('.cell').borderTopColor), bg),
+    check: ratio(parse(getComputedStyle(pressed).color), parse(getComputedStyle(pressed).backgroundColor)),
+  };
+};
+for (const scheme of ['light', 'dark']) {
+  test(`NF-A11Y-01 (round 2): control borders >= 3:1 and check mark >= 4.5:1 (${scheme})`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    const h = new HabitlyPage(page);
+    await page.goto('/');
+    await h.add('Read', 3);
+    await h.cell('Read', localDate()).click();
+    const r = await page.evaluate(CONTRAST_JS);
+    note('informational', `${scheme}: input ${r.input.toFixed(2)}, empty cell ${r.cell.toFixed(2)}, check mark ${r.check.toFixed(2)}`);
+    expect(r.input, JSON.stringify(r)).toBeGreaterThanOrEqual(3);
+    expect(r.cell, JSON.stringify(r)).toBeGreaterThanOrEqual(3);
+    expect(r.check, JSON.stringify(r)).toBeGreaterThanOrEqual(4.5);
+  });
+}
+test('NF-A11Y-01 (round 2): invalid submit marks the field, links the message and moves focus; a valid submit clears it', async ({ page }) => {
+  const h = new HabitlyPage(page);
+  await page.goto('/');
+  await h.add('   ', 3);
+  await h.expectError('Name is required.');
+  await expect(h.name).toHaveAttribute('aria-invalid', 'true');
+  await expect(h.name).toHaveAttribute('aria-describedby', 'status');
+  await expect(h.name).toBeFocused();
+  await h.add('Read', 9);
+  await h.expectError('Target must be a whole number from 1 to 7.');
+  await expect(h.target).toHaveAttribute('aria-invalid', 'true');
+  await expect(h.target).toBeFocused();
+  await expect(h.name).not.toHaveAttribute('aria-invalid', 'true');
+  await h.add('Read', 3);
+  await expect(h.status).toHaveText('Habit added.');
+  await expect(h.target).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(h.target).not.toHaveAttribute('aria-describedby', 'status');
+});
