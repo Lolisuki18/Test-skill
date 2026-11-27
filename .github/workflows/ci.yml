@@ -15,8 +15,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Compile check
-        run: python -m compileall -q taskbox notes_web pulseboard tests
+        run: python -m compileall -q taskbox notes_web pulseboard vault tests
       - name: Run unit and integration tests
         run: python -W error -m unittest discover -s tests -t .
       - name: PulseBoard migration smoke check
         run: python -m pulseboard --db /tmp/pulseboard-ci.db --seed --migrate-only
+      - name: Vault migration smoke check
+        run: python -m vault --db /tmp/vault-ci.db --seed --migrate-only
