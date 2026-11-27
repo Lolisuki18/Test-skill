@@ -1,0 +1,14 @@
+{
+  "name": "ledger-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zero-dependency Node.js ESM expense approval API and UI for multi-stack skill testing.",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
