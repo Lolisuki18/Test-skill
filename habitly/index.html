@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>habitly</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#grid-section">Skip to the week grid</a>
+  <header>
+    <h1>habitly</h1>
+    <p id="status" role="status" aria-live="polite"></p>
+  </header>
+  <main>
+    <section aria-labelledby="add-h">
+      <h2 id="add-h">Add a habit</h2>
+      <form id="habit-form" novalidate>
+        <label for="habit-name">Name</label>
+        <input id="habit-name" name="name" maxlength="60" autocomplete="off" required>
+        <label for="habit-target">Target days per week</label>
+        <input id="habit-target" name="target" type="number" min="1" max="7" value="3" inputmode="numeric" required>
+        <div class="row">
+          <button type="submit" id="habit-submit">Add habit</button>
+          <button type="button" id="habit-cancel" class="secondary" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="grid-section" aria-labelledby="week-h">
+      <h2 id="week-h">Week of <span id="week-label"></span></h2>
+      <div class="row">
+        <button type="button" id="prev-week">Previous week</button>
+        <button type="button" id="this-week">This week</button>
+        <button type="button" id="next-week">Next week</button>
+      </div>
+      <div class="scroll" tabindex="0" role="region" aria-label="Weekly habit grid">
+        <table id="grid">
+          <caption class="sr-only">Habits by day. Each day cell is a toggle button.</caption>
+          <thead id="grid-head"></thead>
+          <tbody id="grid-body"></tbody>
+        </table>
+      </div>
+      <p id="empty" hidden>No habits yet. Add one above.</p>
+    </section>
+
+    <section aria-labelledby="arch-h">
+      <h2 id="arch-h">Archived</h2>
+      <ul id="archived"></ul>
+    </section>
+
+    <section aria-labelledby="backup-h">
+      <h2 id="backup-h">Backup</h2>
+      <div class="row">
+        <button type="button" id="export">Export JSON</button>
+        <label for="import-file">Import JSON file</label>
+        <input type="file" id="import-file" accept="application/json,.json">
+      </div>
+    </section>
+  </main>
+  <script type="module" src="src/ui/app.js"></script>
+</body>
+</html>

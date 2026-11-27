@@ -1,0 +1,11 @@
+{
+  "name": "habitly",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Habit tracker: vanilla JS, no build step, localStorage.",
+  "scripts": {
+    "test": "node --test",
+    "serve": "python -m http.server 8080"
+  }
+}
