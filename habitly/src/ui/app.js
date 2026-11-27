@@ -2,7 +2,7 @@ import { emptyState, addHabit, editHabit, setArchived, toggleDone, isDone } from
 import { localDateString, weekDays, addDays } from '../domain/dates.js';
 import { currentStreak, bestStreak, weekCount } from '../domain/streaks.js';
 import { serialize, parseBackup } from '../domain/backup.js';
-import { load, save } from '../storage.js';
+import { load, save, getStore } from '../storage.js';
 
 const $ = (id) => document.getElementById(id);
 const DAY = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -10,6 +10,7 @@ const DAY = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 let state = emptyState();
 let anchor = localDateString(); // any day inside the viewed week
 let editingId = null;
+const store = getStore(); // null when even reading window.localStorage throws
 
 const today = () => localDateString();
 
@@ -21,7 +22,7 @@ function say(msg, isError = false) {
 
 function commit(next, msg) {
   state = next;
-  if (!save(localStorage, state)) say('Could not save to this browser; changes will be lost on reload.', true);
+  if (!save(store, state)) say('Could not save to this browser; changes will be lost on reload.', true);
   else if (msg) say(msg);
   render();
 }
@@ -83,12 +84,27 @@ function render() {
   }
 }
 
-function guard(fn) {
+function guard(fn, onError) {
   try {
     fn();
   } catch (e) {
     say(e.message, true);
+    if (onError) onError(e);
   }
+}
+
+const FIELDS = ['habit-name', 'habit-target'];
+function clearInvalid() {
+  for (const id of FIELDS) {
+    $(id).removeAttribute('aria-invalid');
+    $(id).removeAttribute('aria-describedby');
+  }
+}
+function markInvalid(e) {
+  const f = $(/^Target/.test(e.message) ? 'habit-target' : 'habit-name');
+  f.setAttribute('aria-invalid', 'true');
+  f.setAttribute('aria-describedby', 'status');
+  f.focus();
 }
 
 function onToggle(id, date) {
@@ -121,6 +137,7 @@ function startEdit(id) {
 
 function endEdit() {
   editingId = null;
+  clearInvalid();
   $('habit-form').reset();
   $('habit-submit').textContent = 'Add habit';
   $('habit-cancel').hidden = true;
@@ -128,6 +145,7 @@ function endEdit() {
 
 $('habit-form').addEventListener('submit', (ev) => {
   ev.preventDefault();
+  clearInvalid();
   guard(() => {
     const raw = $('habit-target').value.trim();
     const input = { name: $('habit-name').value, target: raw === '' ? NaN : Number(raw) };
@@ -136,7 +154,7 @@ $('habit-form').addEventListener('submit', (ev) => {
     endEdit();
     commit(next, `Habit ${verb}.`);
     $('habit-name').focus();
-  });
+  }, markInvalid);
 });
 $('habit-cancel').addEventListener('click', () => { endEdit(); say('Edit cancelled.'); });
 $('prev-week').addEventListener('click', () => { anchor = addDays(anchor, -7); render(); say('Showing previous week.'); });
@@ -171,7 +189,7 @@ $('import-file').addEventListener('change', async (ev) => {
   ev.target.value = '';
 });
 
-const loaded = load(localStorage);
+const loaded = load(store);
 state = loaded.state;
 render();
 if (loaded.notice) say(loaded.notice, true);

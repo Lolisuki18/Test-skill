@@ -4,6 +4,15 @@ import { validateState } from './domain/backup.js';
 export const KEY = 'habitly.v1';
 export const CORRUPT_KEY = 'habitly.v1.corrupt';
 
+/** Returns host.localStorage, or null when even reading the property throws (blocked site data). */
+export function getStore(host = globalThis) {
+  try {
+    return host.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * `store` is any object with getItem/setItem (localStorage, or a fake in tests).
  * Returns { state, notice }. Corrupt data is copied to CORRUPT_KEY, never lost.

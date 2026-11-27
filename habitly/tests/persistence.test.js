@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { emptyState, addHabit, toggleDone } from '../src/domain/habits.js';
 import { serialize, parseBackup, validateState, MAX_BACKUP_BYTES } from '../src/domain/backup.js';
-import { load, save, KEY, CORRUPT_KEY } from '../src/storage.js';
+import { load, save, getStore, KEY, CORRUPT_KEY } from '../src/storage.js';
 
 const TODAY = '2026-11-27';
 const sample = () => toggleDone(addHabit(emptyState(), { name: 'Read', target: 3 }, TODAY), 'h1', '2026-11-26', TODAY);
@@ -68,4 +68,18 @@ test('R7 negative: throwing storage degrades without throwing', () => {
   const bad = { getItem() { throw new Error('denied'); }, setItem() { throw new Error('full'); } };
   assert.match(load(bad).notice, /unavailable/);
   assert.equal(save(bad, emptyState()), false);
+});
+
+// ---- R7 / DEF-001: reading the localStorage property itself can throw
+test('R7 negative: getStore returns null when reading localStorage throws (DEF-001)', () => {
+  const host = {};
+  Object.defineProperty(host, 'localStorage', { get() { throw new Error('SecurityError'); } });
+  assert.equal(getStore(host), null);
+  assert.match(load(getStore(host)).notice, /unavailable/);
+  assert.equal(save(getStore(host), sample()), false);
+});
+test('R7 happy: getStore returns the host storage when available (DEF-001)', () => {
+  const st = fakeStore();
+  assert.equal(getStore({ localStorage: st }), st);
+  assert.equal(getStore({}), null);
 });
